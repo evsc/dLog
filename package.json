@@ -1,0 +1,13 @@
+{
+  "name": "dLog",
+  "description": "dream log database",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "node-static": "0.5.9",
+    "mongoose": "2.3.10"
+  },
+  "engine": "node >= 0.4.11"
+}

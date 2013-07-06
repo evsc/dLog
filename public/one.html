@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>New Dream</title>
+	<link rel="stylesheet" type="text/css" media="all" href="style.css" />
+	<link rel="stylesheet" media="screen" type="text/css" href="lib/datepicker/css/datepicker.css" />
+	<script type="text/javascript" src="lib/datepicker/js/jquery.js"></script>
+	<script type="text/javascript" src="lib/datepicker/js/datepicker.js"></script>
+	<script type="text/javascript" src="lib/datepicker/js/eye.js"></script>
+    <script type="text/javascript" src="lib/datepicker/js/utils.js"></script>
+    <script type="text/javascript" src="lib/datepicker/js/layout.js?ver=1.0.2"></script>
+	<script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="js/date.format.js"></script>
+	<script src="js/main.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			start('one');
+	    });
+	</script>
+</head>
+<body>
+	<div id="container">
+
+		<div id="header">
+			<div id="menu">
+				<a href="/all">all</a>
+			</div>
+		</div>
+
+		<div id="main">
+			
+			<h1>Dream</h1>
+			<div id="log"></div>
+			<div>
+				<div id="submit">Submit Dream</div>
+			</div>
+			<div id="data">
+				
+				<div id="col">
+					
+
+					<div>
+						<label for="inputDate">Date (before Night)</label>
+						<input class="inputDate" id="inputDate" value="" />
+					</div>
+
+					<div>
+						<label for="title">Dream Title</label>
+						<input type="text" name="title" id="title" />
+					</div>
+
+					<div>
+						<label for="dream">Your Dream</label>
+						<!-- <textarea name="dream" id="dream"  cols="30" rows="3" ></textarea> -->
+						<div id="dream" class="double">
+							<div class="highlight">
+								<div class="wrap">
+									<div class="echoer">
+									</div>
+								</div>
+							</div>
+							<div class="inputText">
+								<div class="wrap">
+									<textarea>
+									</textarea>
+								</div>
+							</div>
+						</div>
+						<!-- <input type="textarea" name="dream" id="dream"> -->
+					</div>
+
+					<div>
+						<label for="diary">Your Diary</label>
+						<textarea name="diary" id="diary"></textarea>
+					</div>
+
+					<div>
+						<label for="interpretation">Your Interpretation</label>
+						<textarea name="interpretation" id="interpretation"></textarea>
+					</div>
+				</div> <!-- end col -->
+				<div id="col">
+					<div id="tags" class="taglist">
+						<h3>Tags</h3>
+						<ul>
+<!-- 							<li>flying</li>
+							<li>marsh</li> -->
+						</ul>
+					</div>
+					<div id="characters" class="taglist">
+						<h3>Characters</h3>
+						<ul>
+<!-- 							<li>Douglas</li>
+							<li>Alma</li> -->
+						</ul>
+					</div>
+				</div>
+
+					
+			</div> <!-- end data -->
+		</div>  <!-- end main -->
+	</div>  <!-- end container -->
+</body>
+</html>

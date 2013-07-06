@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Dream Archive</title>
+	<link rel="stylesheet" type="text/css" media="all" href="style.css" />
+	<link rel="stylesheet" media="screen" type="text/css" href="lib/datepicker/css/datepicker.css" />
+	<script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+	<script src="js/main.js"></script>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+    // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+      
+      // Set a callback to run when the Google Visualization API is loaded.
+      // google.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table, 
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+	function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Dreams');
+        data.addColumn('number', 'Tag');
+        data.addRows([
+          ['March', 3],
+          ['April', 7],
+          ['May', 1],
+          ['June', 2]
+        ]);
+
+        var options = {
+          width: 400, height: 240
+          // title: 'Tag: x',
+          // vAxis: {title: 'Dreams',  titleTextStyle: {color: 'red'}}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+
+    $(document).ready(function(){
+	      start('all');
+	});
+
+    </script>
+
+
+</head>
+<body>
+	<div id="container">
+
+		<div id="header">
+			<div id="menu">
+				<a href="/one">new</a>
+				<a href="/all">all</a>
+			</div>
+		</div>
+
+		<div id="main">
+			<h1>Dream Archive</h1>
+			<div id="log"></div>
+
+			<div id="chart_div" style="width:400; height:300"></div>
+
+			<div id="archive">
+
+<!-- SAMPLE		<div id="dream">
+					<div id="date">05/12/2011</div>
+					<div id="title">Wild Ocean, Douglas, Alma, Canoes and Desperation</div>
+					<div id="characters">characters (2)</div>
+					<div id="tags">tags (8)</div>
+					<div id="buttons">
+						<div id="edit">edit</div>
+						<div id="delete">x</div>
+					</div>
+				</div> -->
+
+			</div> <!-- end data -->
+		</div>  <!-- end main -->
+	</div>  <!-- end container -->
+</body>
+</html>

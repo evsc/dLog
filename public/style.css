@@ -1,0 +1,112 @@
+/*  ---------------------------------------------------------
+	RESET
+	---------------------------------------------------------
+*/
+
+html, body, div, span, a, img,
+h1, h2, h3, h4, h5, h6, p, 
+ol, ul, li, b, big, blockquote,
+cite, code, em, i, pre, small, strong, sub, sup,
+form, table, tr, th, td,
+textarea, input, select {
+	font-family: inherit; font-size: 100%; font-weight: inherit; font-style: inherit; margin: 0; padding: 0; border: 0; outline: 0; }
+
+
+/*  ---------------------------------------------------------
+	GENERAL STYLES
+	---------------------------------------------------------
+*/
+
+body { background-color: #fff; color: #444; font-family: Georgia, Times New Roman, serif; font-size: 12px; letter-spacing: 1px; }
+h1, h2, h3, h4, h5, h6 { margin-bottom: 16px; }
+h1 { font-size: 36px; line-height: 40px;  }
+
+#container { padding: 20px;  }
+#main { padding-left: 100px; }
+
+/* --- header --- */
+#menu { color: #999; float: left; width: 50px; }
+#menu a { text-decoration: none; color: #999; }
+#menu a:hover { color: #666; }
+
+/* --- cols --- */
+
+#data #col { margin-left: 20px; padding-left: 20px;  }
+#data #col:first-child { float: left; width: 520px; padding-left: 0px; margin-left: 0px; }
+
+/* --- forms --- */
+form { }
+input, textarea { letter-spacing: 1px; resize: none; font-size: 16px; line-height: 16px; color: #000;  }
+
+#data input, #data textarea { padding: 5px; }
+#data #dream, #data input, #data textarea { border: solid 1px #f8f8f8; background-color: #eee; }
+#data.noEdit #dream, #data.noEdit input, #data.noEdit textarea {  border: 1px solid #aaa; background-color: #fff; }       
+
+#data.noEdit label { color: #aaa; }
+
+#data #dream:hover, #data input:hover, #data textarea:hover { border: 1px solid #ddd;  }
+#data #dream:focus, #data input:focus, #data textarea:focus { border: 1px solid #4cf;  }
+
+#data.noEdit #dream:hover, #data.noEdit input:focus, #data.noEdit textarea:focus { border: 1px solid #ccc; }
+#data.noEdit #dream:focus, #data.noEdit input:hover, #data.noEdit textarea:hover { border: 1px solid #bbb; }
+
+#data #diary, #data #interpretation, #data #title { width: 400px; }
+
+/*#date #inputDate { width: 300px; background-color: #ff0; }*/
+
+
+/*#diary, #interpretation { height: 60px; }*/
+#data label { display: block; }
+#data > div { margin-bottom: 22px; }
+#submit,
+#buttons > div { border: 1px solid #666; background-color: #eee; color: #000; cursor:pointer;  }
+#submit { padding: 10px; display: inline-block; }
+#buttons > div { padding: 2px; margin-right: 5px; min-width: 16px; text-align: center; font-size: 12px; }
+#submit:hover,
+#buttons > div:hover { background-color: #ccc; border: 1px solid #4cf; };
+
+#log { color: #f44; margin-bottom: 16px; }
+
+
+#data #dream, .highlight, .inputText, .inputText textarea, .highlight .echoer { width: 500px; height: 200px; }
+#data #dream { position: relative; height: 210px; width: 510px; }
+#data #dream .wrap { padding: 5px; }
+#data #dream .highlight, #data #dream .inputText { position: absolute; }
+#data #dream .highlight {  }
+#data #dream textarea { z-index: 999; border: none; padding: 0px; margin: 0px; font-size: 13px; line-height: 20px; white-space: pre-wrap; background-color: #f0f; background: transparent;   }	/*overflow: hidden;*/
+#data #dream textarea:focus, #dream textarea:hover { border: none; }
+#data #dream .echoer { z-index: 998; border: none; padding: 0px; margin: 0px; font-size: 13px; line-height: 20px; white-space: pre-wrap; color: white;  }
+#data #dream .echoer b span, #data #dream .echoer i span { display: inline-block; /*filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0); color: transparent;*/  }
+#data #dream .echoer b { z-index: 998; font-weight: normal; display: inline-block; background-color: #d5d5d5; }
+#data #dream .echoer i { z-index: 998; font-weight: normal; display: inline-block; background-color: #aef; }
+/*#dream .echoer span { background-color: #ff5; }*/
+
+
+
+#data .taglist { display: block; float: left; width: 100px; }
+.taglist h3 { font-weight: bold; }
+.taglist ul { list-style-type: none; }
+.taglist ul li { display: table; margin-bottom: 7px; padding: 3px; }
+#characters.taglist ul li { background-color: #4cf;  }
+#tags.taglist ul li { background-color: #ccc; }
+.taglist ul li:hover { color: #000; cursor: pointer;}
+#characters.taglist ul li:hover { background-color: #4dd5ff;  }
+#tags.taglist ul li:hover { background-color: #d5d5d5;  }
+
+/* --- archive --- */
+#archive {  }
+#archive #dream > div { float: left; margin: 3px;  }
+#archive #dream #buttons { margin: 0px; }
+#archive #dream #buttons > div { float: left; }
+
+#archive #dream { width: 720px; display: table; clear: both; background-color: #fff; margin-bottom: 3px; border: solid 1px #f4f4f4; }
+#archive #dream:hover { border: solid 1px #ddd;  }
+#archive #dream #date { width: 76px; font-family: Arial, sans-serif; }
+#archive #dream #title { width: 395px; font-size: 16px; background-color: #ddd; padding-left: 4px; }
+#archive #dream #title:hover { color: #4cf; background-color: #eee; cursor:pointer; }
+#archive #dream #characters { width: 95px; font-family: Arial, sans-serif; }
+#archive #dream #tags { width: 60px; font-family: Arial, sans-serif; }
+#archive #dream #buttons { width: 65px; font-family: Arial, sans-serif; }
+#archive #dream #buttons > div { border: 0px; text-transform: upperCase; font-size: 10px; margin-top: 3px;}
+#archive #dream #buttons > div:hover { border: 0px; }
+
