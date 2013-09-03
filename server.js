@@ -97,10 +97,10 @@ var server = http.createServer(function (request, response) {
 				case '/all':
 					file.serveFile('/all.html', 500, {}, request, response);
 					break;
-				case '/zeo' : 	
-					response.writeHead(200, {'content-type': 'text/plain' });
-					response.end(JSON.stringify(zeo.getData()));
-					break;
+				// case '/zeo' : 	
+				// 	response.writeHead(200, {'content-type': 'text/plain' });
+				// 	response.end(JSON.stringify(zeo.getData()));
+				// 	break;
 				default :
 					file.serve(request, response, function(err) { 
 						if (err && (err.status === 404)) { 
