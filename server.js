@@ -23,7 +23,7 @@ var db = require('./lib/db.js').initialize(
 	}
 );
 
-var zeo = require('./lib/zeo.js').initialize();
+// var zeo = require('./lib/zeo.js').initialize();
 
 
 // ---------------------------------------
