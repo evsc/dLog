@@ -21,7 +21,7 @@
 		}
 
 
-		/* -------- one --------- */
+		/* -------- display ONE dream --------- */
 		if(space == 'one') {
 			// GET id parameter
 
@@ -142,8 +142,8 @@
 					h = '<div id="dream" class="drC" data-id="'+ d._id +'">';
 					h += '<div id="date">' + formatDate(d.date) + '</div>';
 					h += '<div id="title">' + d.title + '</div>';
-					h += '<div id="characters">' + 'characters (0)' + '</div>';
-					h += '<div id="tags">' + 'tags (0)' + '</div>';
+					h += '<div id="characters">' + 'characters (' + d.char_cnt+')' + '</div>';
+					h += '<div id="tags">' + 'tags ('+d.tag_cnt+')' + '</div>';
 					h += '<div id="buttons">';
 					h += '<div id="edit">edit</div>';
 					h += '<div id="delete">x</div>';

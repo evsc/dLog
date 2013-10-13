@@ -54,7 +54,7 @@ var server = http.createServer(function (request, response) {
 			}
 
 			if(dataJSON) {
-				if(dataJSON.pass == 'gogogo') {
+				if(dataJSON.pass == config.accesspw) {
 					switch(dataJSON.req) {
 						case 'all' : 	handle.all(db,dataJSON.tag,dataJSON.character,response);
 										break;
