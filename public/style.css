@@ -31,18 +31,21 @@ h1 { font-size: 36px; line-height: 40px;  }
 
 /* --- cols --- */
 
-#data #col { margin-left: 20px; padding-left: 20px;  }
-#data #col:first-child { float: left; width: 520px; padding-left: 0px; margin-left: 0px; }
+#data #col { margin-left: 0px; padding-left: 0px; padding-right: 50px; display: block; float: left; }
+#data #col:first-child { float: left; width: 520px; margin-left: 0px; }
+#data .cat_title { width: 120px; float: left; }
+#data .cat_selection { float: left; }
+#data .cat_add { float: left; }
 
 /* --- forms --- */
 form { }
 input, textarea { letter-spacing: 1px; resize: none; font-size: 16px; line-height: 16px; color: #000;  }
 
-#data input, #data textarea { padding: 5px; }
+#data input, #data textarea { padding: 5px; margin-bottom:15px; margin-right:5px; }
 #data #dream, #data input, #data textarea { border: solid 1px #f8f8f8; background-color: #eee; }
 #data.noEdit #dream, #data.noEdit input, #data.noEdit textarea {  border: 1px solid #aaa; background-color: #fff; }       
 
-#data.noEdit label { color: #aaa; }
+#data.noEdit label, #data.noEdit .cat_title { color: #aaa; }
 
 #data #dream:hover, #data input:hover, #data textarea:hover { border: 1px solid #ddd;  }
 #data #dream:focus, #data input:focus, #data textarea:focus { border: 1px solid #4cf;  }
@@ -50,13 +53,13 @@ input, textarea { letter-spacing: 1px; resize: none; font-size: 16px; line-heigh
 #data.noEdit #dream:hover, #data.noEdit input:focus, #data.noEdit textarea:focus { border: 1px solid #ccc; }
 #data.noEdit #dream:focus, #data.noEdit input:hover, #data.noEdit textarea:hover { border: 1px solid #bbb; }
 
-#data #diary, #data #interpretation, #data #title { width: 400px; }
+#data #diary, #data #interpretation, #data #title { width: 500px; }
 
 /*#date #inputDate { width: 300px; background-color: #ff0; }*/
 
 
-/*#diary, #interpretation { height: 60px; }*/
-#data label { display: block; }
+#diary, #interpretation { height: 60px; }
+#data label, #data .cat_title { display: block; font-family: sans-serif; font-size: 12px; }
 #data > div { margin-bottom: 22px; }
 #submit,
 #buttons > div { border: 1px solid #666; background-color: #eee; color: #000; cursor:pointer;  }
@@ -68,6 +71,7 @@ input, textarea { letter-spacing: 1px; resize: none; font-size: 16px; line-heigh
 #log { color: #f44; margin-bottom: 16px; }
 
 
+#data #dream { margin-bottom:15px; }
 #data #dream, .highlight, .inputText, .inputText textarea, .highlight .echoer { width: 500px; height: 200px; }
 #data #dream { position: relative; height: 210px; width: 510px; }
 #data #dream .wrap { padding: 5px; }
@@ -83,9 +87,9 @@ input, textarea { letter-spacing: 1px; resize: none; font-size: 16px; line-heigh
 
 
 
-#data .taglist { display: block; float: left; width: 100px; }
-.taglist h3 { font-weight: bold; }
-.taglist ul { list-style-type: none; }
+#data .taglist { display: block; float: left; width: 100px; padding-right:10px; }
+h3 { font-size: 20px; font-weight: normal; }
+.taglist ul { list-style-type: none; margin-bottom: 20px; }
 .taglist ul li { display: table; margin-bottom: 7px; padding: 3px; }
 #characters.taglist ul li { background-color: #4cf;  }
 #tags.taglist ul li { background-color: #ccc; }

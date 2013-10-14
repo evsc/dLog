@@ -251,10 +251,14 @@
 
 		if(!v) {
 			$('#data').addClass('noEdit');
+			$('input:radio[name=typesleep]').attr('disabled',true);
+			$('input:radio[name=typedream]').attr('disabled',true);
 			$('input, textarea').attr("readonly", "readonly");
 			console.log("enabled");
 		} else {
 			$('#data').removeClass('noEdit');
+			$('input:radio[name=typesleep]').attr('disabled',false);
+			$('input:radio[name=typedream]').attr('disabled',false);
 			$('input, textarea').removeAttr("readonly");
 			$('#submit').attr("disabled", "disabled");
 			console.log("disabled");
@@ -374,6 +378,7 @@
 	}
 
 	function getData( handle, id ) {
+		console.log("getData()");
 		var dream = $('#dream .inputText textarea').val();
 		var diary = $('#diary').val();
 		var title = $('#title').val();
@@ -382,6 +387,8 @@
 		var id = id || null;
 		var tags = $('#data').data('tags');
 		var characters = $('#data').data('characters');
+		var sleep_type = $('input:radio[name=typesleep]:checked').val();
+		var dream_type = $('input:radio[name=typedream]:checked').val();
 
 		var dreamData = { req : handle, data : {
 			"dream" : dream,
@@ -391,7 +398,9 @@
 			"date" : date,
 			"id" : id,
 			"tags" : tags,
-			"characters" : characters
+			"characters" : characters,
+			"sleep_type" : sleep_type,
+			"dream_type" : dream_type
 		}, pass : pass};
 
 		return dreamData;
