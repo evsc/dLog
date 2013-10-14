@@ -13,4 +13,9 @@ access:   http://127.0.0.1:8010/
 ==========================
 
 TODO
-- 
+- scroll window, scrolling of highlighting
+- tag write: propose existing tags/characters
+- date, display day of week
+- type of sleep: night / daytime nap
+- type of dream: regular / lucid
+- categorize: realistic - unrealistic, positive - negative, innocent - erotic
