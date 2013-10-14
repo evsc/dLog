@@ -131,6 +131,18 @@
 			if(tag) $('h1').append(" / tag: "+tag);
 			if(character) $('h1').append(" / character: "+character);
 
+			var firstMonth = new Date(2010,1,1);
+			firstMonth.setDate(1);
+			var lastMonth = new Date(Date.now());
+			lastMonth.setDate(1);
+			var tag_by_month = new Array(); 
+			var m = 0;
+			for ( var dd = firstMonth; dd <= lastMonth; dd.setMonth(dd.getMonth() + 1)) {
+				tag_by_month[m] = {date: dd.getFullYear() +'/'+dd.getMonth(), count: 0 };
+				m++;
+			};
+			var months = m;
+
 			// load all dreams into page
 			$.post(url, '{ "req" : "all", "tag" : "'+tag+'", "character" : "'+character+'", "pass" : "'+pass+'" }', function(response) {
 				var all = JSON.parse(response);
@@ -139,6 +151,17 @@
 				var h = '';
 				var b = ''
 				all.allDreams.forEach( function(d) {
+					// 
+					var dreamDate = new Date(d.date);
+					var dreamMonth = dreamDate.getFullYear() +'/'+dreamDate.getMonth();
+
+					for (var i=0; i<tag_by_month.length; i++) {
+						if (tag_by_month[i].date == dreamMonth) {
+							tag_by_month[i].count += 1;
+							break;
+						}
+					}
+
 					h = '<div id="dream" class="drC" data-id="'+ d._id +'">';
 					h += '<div id="date">' + formatDate(d.date) + '</div>';
 					h += '<div id="title">' + d.title + '</div>';
@@ -172,11 +195,22 @@
 					window.location = "one.html?id=" + id;
 				})
 
+				if (tag != false || character != false) {
+
+			        var chartData = [];
+			        for (var i=0; i<tag_by_month.length; i++) { // tag_by_month.length
+			        	chartData[i] = [tag_by_month[i].date, tag_by_month[i].count];
+			        };
+
+			        drawChart(tag, chartData);
+				}
 
 			});
+
 		}
 
 	}
+
 
 	function highlightKeys(t) {
 		var textval = $(t).val();
