@@ -103,13 +103,14 @@ h3 { font-size: 20px; font-weight: normal; }
 #archive #dream #buttons { margin: 0px; }
 #archive #dream #buttons > div { float: left; }
 
-#archive #dream { width: 720px; display: table; clear: both; background-color: #fff; margin-bottom: 3px; border: solid 1px #f4f4f4; }
+#archive #dream { width: 820px; display: table; clear: both; background-color: #fff; margin-bottom: 3px; border: solid 1px #f4f4f4; }
 #archive #dream:hover { border: solid 1px #ddd;  }
 #archive #dream #date { width: 76px; font-family: Arial, sans-serif; }
 #archive #dream #title { width: 395px; font-size: 16px; background-color: #ddd; padding-left: 4px; }
 #archive #dream #title:hover { color: #4cf; background-color: #eee; cursor:pointer; }
 #archive #dream #characters { width: 95px; font-family: Arial, sans-serif; }
 #archive #dream #tags { width: 60px; font-family: Arial, sans-serif; }
+#archive #dream #words { width: 80px; font-family: Arial, sans-serif; }
 #archive #dream #buttons { width: 65px; font-family: Arial, sans-serif; }
 #archive #dream #buttons > div { border: 0px; text-transform: upperCase; font-size: 10px; margin-top: 3px;}
 #archive #dream #buttons > div:hover { border: 0px; }

@@ -167,6 +167,7 @@
 					h += '<div id="title">' + d.title + '</div>';
 					h += '<div id="characters">' + 'characters (' + d.char_cnt+')' + '</div>';
 					h += '<div id="tags">' + 'tags ('+d.tag_cnt+')' + '</div>';
+					h += '<div id="words">' + 'words ('+d.word_cnt+')' + '</div>';
 					h += '<div id="buttons">';
 					h += '<div id="edit">edit</div>';
 					h += '<div id="delete">x</div>';

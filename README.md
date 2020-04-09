@@ -19,3 +19,6 @@ TODO
 - type of sleep: night / daytime nap
 - type of dream: regular / lucid
 - categorize: realistic - unrealistic, positive - negative, innocent - erotic
+- sorting features to /all 
+- store length of dream as variable, not to calc it on every POST req
+- delete characters/tags that don't have dreams attached

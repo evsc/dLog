@@ -23,6 +23,8 @@ var db = require('./lib/db.js').initialize(
 	}
 );
 
+util.log("port : "+port);
+
 // var zeo = require('./lib/zeo.js').initialize();
 
 
@@ -54,6 +56,7 @@ var server = http.createServer(function (request, response) {
 			}
 
 			if(dataJSON) {
+				util.log('dataJSON.pass '+dataJSON.pass + '   config.accesspw ' + config.accesspw);
 				if(dataJSON.pass == config.accesspw) {
 					switch(dataJSON.req) {
 						case 'all' : 	handle.all(db,dataJSON.tag,dataJSON.character,response);
@@ -78,7 +81,7 @@ var server = http.createServer(function (request, response) {
 
 			}
 
-		});
+		}).resume();
 
 
 
@@ -92,6 +95,7 @@ var server = http.createServer(function (request, response) {
 				case '/one':
 					var url = '/one.html';
 					if(params.id) url += '?id='+params.id;
+
 					file.serveFile(url, 500, {}, request, response);
 					break;
 				case '/all':
@@ -109,7 +113,8 @@ var server = http.createServer(function (request, response) {
 						}
 					});
 			}
-		});
+		}).resume();
+
 	}
 
 });
