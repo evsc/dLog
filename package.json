@@ -6,7 +6,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "mongoose": "5.0.15",
+    "mongoose": "5.9.7",
     "node-static": "0.5.9"
   },
   "engine": "node >= 0.4.11"
