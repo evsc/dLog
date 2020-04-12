@@ -11,6 +11,7 @@
 	var pass;
 	// url = "http://localhost:8010";
 
+
 	start = function( space ) {
 
 		// check cookie to see if password has been set already
@@ -24,6 +25,8 @@
 		/* -------- display ONE dream --------- */
 		if(space == 'one') {
 			// GET id parameter
+
+			
 
 			$.urlParam = function(name){
 				var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -41,7 +44,6 @@
 
 			if(id) {
 				$('#dream .inputText textarea').val('');
-				
 
 				console.log("POST request");
 				$.post(url, '{ "req" : "one", "id" : "'+id+'", "pass" : "'+pass+'" }', function(response) {
@@ -79,6 +81,10 @@
 				// $('#submit').removeAttr("disabled");
 			});
 
+			$("#dream textarea").on({
+				'scroll': handleScroll
+			});
+
 			// $('#dream').keyup( function() {
 			// 	console.log("#dream keyUP");
 			// 	$('#title').val("The M");
@@ -108,6 +114,12 @@
 			$("#characters ul li").live("click", function() {
 				var charName = $(this).text();
 				window.location = "all?character=" + charName;
+			});
+
+			$("#typesleep_night").live("click", function() {
+				var sleepName = $(this).value();
+				alert(sleepName);
+				window.location = "all?sleep=" + sleepName;
 			});
 
 		}
@@ -213,19 +225,27 @@
 	}
 
 
+	function handleScroll() {
+
+		var scrollTop = $("#dream textarea").scrollTop();
+		console.log("handleScroll "+scrollTop);
+		$("#dream .highlight").scrollTop(scrollTop);
+	}
+
 	function highlightKeys(t) {
 		var textval = $(t).val();
 		var markedup = textval.replace(/(this)/g, "<b><span>$1</span></b>");
 		// make up for the fact that ie loses the whitespace:pre after setting html
 	    // markedup = markedup.replace(/ {2}/g, '&nbsp; ');
-		$("#dream .echoer").html(markedup);
+		$("#dream #echoer").html(markedup);
 	}
 
 	function highlightTag(t) {
 			var textval = $(t).val();
 			var markedup = textval.replace( /(^|\s)(#\w+)/g, "$1<b><span>$2</span></b>" );
 			markedup = markedup.replace( /(^|\s)(@\w+)/g, "$1<i><span>$2</span></i>" );
-			$("#dream .echoer").html(markedup);
+			markedup = markedup.replace(/\n$/g, '\n\n'); 	// fixes a bug where a trailing carriage return causes the highlights <div> to become misaligned
+			$("#dream #echoer").html(markedup);
 		}
 
 	function newTags() {
@@ -235,11 +255,11 @@
 		cleanTags('characters');
 		
 
-		$("#dream .echoer b").each( function() {
+		$("#dream #echoer b").each( function() {
 			// console.log( $(this).text() );
 			addTag('tags', $(this).text().substring(1) );
 		})
-		$("#dream .echoer i").each( function() {
+		$("#dream #echoer i").each( function() {
 			// console.log( $(this).text() );
 			addTag('characters', $(this).text().substring(1) );
 		})
@@ -251,12 +271,14 @@
 		$('#submit').text( v ? 'Save' : 'Edit');
 
 		if(!v) {
+			$("#dream #echoer").removeClass('hide');
 			$('#data').addClass('noEdit');
 			$('input:radio[name=typesleep]').attr('disabled',true);
 			$('input:radio[name=typedream]').attr('disabled',true);
 			$('input, textarea').attr("readonly", "readonly");
 			console.log("enabled");
 		} else {
+			$("#dream #echoer").addClass('hide');
 			$('#data').removeClass('noEdit');
 			$('input:radio[name=typesleep]').attr('disabled',false);
 			$('input:radio[name=typedream]').attr('disabled',false);
@@ -270,7 +292,7 @@
 	function clearForm() {
 		$('#title').val('');
 		$('#dream .inputText textarea').val('');
-		$('#dream .echoer').text('');
+		$('#dream #echoer').text('');
 		$('#diary').val('');
 		$('#interpretation').val('');
 		$('#inputDate').val(formatDate(new Date()));
