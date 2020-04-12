@@ -1,6 +1,6 @@
 // ----- MongoDB configuration -----
 exports.db = [];
-exports.db.url = 'ddddd.mongolab.com:00000';
+exports.db.url = 'mongodb://localhost/';
 exports.db.database = 'dbname';
 exports.db.username = 'user';
 exports.db.password = 'pw';
