@@ -6,11 +6,12 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "mongoose": "^6.6.1",
+    "mongoose": "6.6.1",
     "node-static": "0.7.11"
   },
-  // "resolutions": {
-  //   "minimist": "1.2.6"
-  // },
+  "overrides": {
+    "optimist": "0.6.0",
+    "minimist": "1.2.6"
+  },
   "engine": "node >= 0.4.11"
 }
