@@ -23,6 +23,7 @@ access:   http://127.0.0.1:8010/
 
 TODO
 
+- characters/tags page 
 - scroll window with highlights, still issue with padding, sometimes highlights misalign  
 https://codersblock.com/blog/highlight-text-inside-a-textarea/ 
 

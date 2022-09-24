@@ -18,6 +18,15 @@
 		pass = getCookie('dlogcookie');
 		if(pass === null) { 
 			pass = prompt("Moderation Password","");
+			$.post(url, '{ "req" : "checkpw", "pass" : "'+pass+'" }', function(response) {
+				console.log('POST reponse: '+response);
+				if(response=='1') {
+					console.log('Password correct');
+				} else {
+					alert("incorrect password");
+					console.log('Password incorrect');
+				}
+			});
 			setCookie('dlogcookie', pass, 7);
 		}
 

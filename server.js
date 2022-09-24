@@ -67,7 +67,10 @@ var server = http.createServer(function (request, response) {
 										break;
 						case 'save' : 	handle.saveDream(db,dataJSON.data,response);
 										break;
+						case 'checkpw': response.end('1');
+										break;
 					}
+
 				} else {
 					util.log('Wrong Password: '+dataJSON.pass);
 					response.writeHead(200, {'content-type': 'text/plain' });
