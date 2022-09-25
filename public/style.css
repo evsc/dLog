@@ -92,12 +92,14 @@ input, textarea { letter-spacing: 1px; resize: none; font-size: 16px; line-heigh
 
 
 #data .taglist { display: block; float: left; width: 100px; padding-right:10px; }
+#data .tagcloud { width: 400px;  }
 h3 { font-size: 20px; font-weight: normal; }
-.taglist ul { list-style-type: none; margin-bottom: 20px; }
+.taglist ul, .tagcloud ul { list-style-type: none; margin-bottom: 20px; }
 .taglist ul li { display: table; margin-bottom: 7px; padding: 3px; }
+.tagcloud ul li { display: inline-block; margin-bottom: 7px; padding: 3px; margin-right:10px; }
 #characters.taglist ul li { background-color: #4cf;  }
-#tags.taglist ul li { background-color: #ccc; }
-.taglist ul li:hover { color: #000; cursor: pointer;}
+#tags.taglist ul li, #tags.tagcloud ul li { background-color: #ccc; }
+.taglist ul li:hover, .tagcloud ul li:hover { color: #000; cursor: pointer;}
 #characters.taglist ul li:hover { background-color: #4dd5ff;  }
 #tags.taglist ul li:hover { background-color: #d5d5d5;  }
 

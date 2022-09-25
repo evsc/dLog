@@ -134,7 +134,30 @@
 		}
 
 
+		/* -------- tags and characters --------- */
+		if(space == 'tags'){
 
+			console.log("POST request all tags");
+			$('#tags.tagcloud ul').html('');
+
+			// load all tags into page
+			$.post(url, '{ "req" : "tags", "pass" : "'+pass+'" }', function(response) {
+				var tags = JSON.parse(response);
+				// sort in descending order
+				tags.allTags.sort(function(a, b) {
+				    return parseFloat(b.cnt) - parseFloat(a.cnt);
+				});
+				tags.allTags.forEach( function(t) {
+					$('#tags.tagcloud ul').append("<li data-name=" + t.name+">" + t.name + " (" + t.cnt+")</li>");
+				});
+			});
+
+			$("#tags ul li").live("click", function() {
+				var tagName = $(this).data('name');
+				window.location = "all?tag=" + tagName;
+			});
+
+		}
 
 
 
@@ -224,6 +247,7 @@
 			        	chartData[i] = [tag_by_month[i].date, tag_by_month[i].count];
 			        };
 
+			        // console.log("draw chart for tag "+tag + "  or character "+character);
 			        drawChart(tag, chartData);
 				}
 

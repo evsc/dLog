@@ -25,8 +25,6 @@ var db = require('./lib/db.js').initialize(
 
 util.log("port : "+port);
 
-// var zeo = require('./lib/zeo.js').initialize();
-
 
 // ---------------------------------------
 // Run
@@ -60,6 +58,8 @@ var server = http.createServer(function (request, response) {
 				if(dataJSON.pass == config.accesspw) {
 					switch(dataJSON.req) {
 						case 'all' : 	handle.all(db,dataJSON.tag,dataJSON.character,response);
+										break;
+						case 'tags' : 	handle.getTags(db,response);
 										break;
 						case 'delete' : handle.deleteDream(db,dataJSON.id,response);
 						 				break;
@@ -101,13 +101,12 @@ var server = http.createServer(function (request, response) {
 
 					file.serveFile(url, 500, {}, request, response);
 					break;
+				case '/tags':
+					file.serveFile('/tags.html', 500, {}, request, response);
+					break;
 				case '/all':
 					file.serveFile('/all.html', 500, {}, request, response);
 					break;
-				// case '/zeo' : 	
-				// 	response.writeHead(200, {'content-type': 'text/plain' });
-				// 	response.end(JSON.stringify(zeo.getData()));
-				// 	break;
 				default :
 					file.serve(request, response, function(err) { 
 						if (err && (err.status === 404)) { 
