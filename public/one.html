@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>New Dream</title>
+	<title>Dream</title>
 	<link rel="stylesheet" type="text/css" media="all" href="style.css" />
 	<link rel="stylesheet" media="screen" type="text/css" href="lib/datepicker/css/datepicker.css" />
 	<script type="text/javascript" src="lib/datepicker/js/jquery.js"></script>
@@ -17,6 +17,11 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			start('one');
+
+			// $('textarea').on('keyup keypress', function() {
+		 //        $(this).height(0);
+		 //        $(this).height(this.scrollHeight);
+		 //    });
 	    });
 	</script>
 </head>
@@ -25,113 +30,119 @@
 
 		<div id="header">
 			<div id="menu">
-				<a href="/all">all</a>
+				<a href="/one">new</a> / 
+				<a href="/all">all</a> / 
 				<a href="/tags">tags</a>
 			</div>
 		</div>
 
 		<div id="main">
 			
-			<h1>Dream 1</h1>
+			<h1>New dream</h1>
 			<div id="log"></div>
 			<div>
-				<div id="submit">Submit Dream</div>
+				<div id="submit">Submit Dream</div> 
 			</div>
-			<div id="data">
+
+			<div id="mainbar">
+				<!-- <h3>Your dream</h3> -->
+
+				<div>
+					<label for="title">Dream Title</label>
+					<input type="text" name="title" id="title" />
+				</div>
+
+				<div>
+					<label for="dream">Your Dream</label>
+					<!-- <textarea name="dream" id="dream"  cols="30" rows="3" ></textarea> -->
+					<div id="dream" class="double">
+						<div class="highlight">
+							<div class="wrap">
+								<div id="echoer">
+								</div>
+							</div>
+						</div>
+						<div class="inputText">
+							<div class="wrap">
+								<textarea>
+								</textarea>
+							</div>
+						</div>
+					</div>
+					<!-- <input type="textarea" name="dream" id="dream"> -->
+				</div>
+
 				
-				<div id="col">
-					<h3>dream</h3>
+				<h3>Your interpretation</h3>
 
-					<div>
-						<label for="title">Dream Title</label>
-						<input type="text" name="title" id="title" />
-					</div>
+				<div>
+					<label for="diary">Your Diary</label>
+					<textarea name="diary" id="diary"></textarea>
+				</div>
 
-					<div>
-						<label for="dream">Your Dream</label>
-						<!-- <textarea name="dream" id="dream"  cols="30" rows="3" ></textarea> -->
-						<div id="dream" class="double">
-							<div class="highlight">
-								<div class="wrap">
-									<div id="echoer">
-									</div>
-								</div>
-							</div>
-							<div class="inputText">
-								<div class="wrap">
-									<textarea>
-									</textarea>
-								</div>
-							</div>
-						</div>
-						<!-- <input type="textarea" name="dream" id="dream"> -->
-					</div>
+				<div>
+					<label for="interpretation">Your Interpretation</label>
+					<textarea name="interpretation" id="interpretation"></textarea>
+				</div>
+			</div>
 
-					
-				</div> <!-- end col -->
-				<div id="col">
-					<div id="tags" class="taglist">
-						<h3>tags</h3>
-						<ul>
+
+
+			<div id="sidebar">
+
+				<h3>Tags</h3>
+				<div id="tags" class="tagcloud">
+					<ul>
 <!-- 							<li>flying</li>
-							<li>marsh</li> -->
-						</ul>
-					</div>
-					<div id="characters" class="taglist">
-						<h3>characters</h3>
-						<ul>
+						<li>marsh</li> -->
+					</ul>
+				</div>
+
+				<hr>
+				<h3>Characters</h3>
+				<div id="characters" class="tagcloud">
+					<ul>
 <!-- 							<li>Douglas</li>
-							<li>Alma</li> -->
-						</ul>
-					</div>
+						<li>Alma</li> -->
+					</ul>
 				</div>
-				<div id="col">
-					<h3>log</h3>
 
-					<div>
-						<div class="cat_title">date</div>
-						<div class="cat_selection">
-							<input class="inputDate" id="inputDate" value="" />
-						</div>
-						<div class="cat_add">Tuesday</div>
-					</div>
-					<div>
-						<div class="cat_title">type of sleep</div>
-						<div class="cat_selection">
-							<input type="radio" name="typesleep" id="typesleep_night" value="night">Night
-							<input type="radio" name="typesleep" id="typesleep_nap" value="nap">Daytime Nap
-						</div>
-					</div>
-					<div>
-						<div class="cat_title">type of dream</div>
-						<div class="cat_selection">
-							<input type="radio" name="typedream" id="regulardream" value="regular">Regular
-							<input type="radio" name="typedream" id="luciddream" value="lucid">Lucid Dream
-						</div>
-					</div>
-					<div>
-						<div class="cat_title">rate</div>
-						<div class="cat_selection">
+				<hr>
+				<h3>Date</h3>
 
-						</div>
-					</div>
-				</div>
-				<div id="col">
-					<h3>interpret</h3>
-
-					<div>
-						<label for="diary">Your Diary</label>
-						<textarea name="diary" id="diary"></textarea>
-					</div>
-
-					<div>
-						<label for="interpretation">Your Interpretation</label>
-						<textarea name="interpretation" id="interpretation"></textarea>
+				<div>
+					<div class="cat_selection">
+						<input class="inputDate" id="inputDate" value="" />
 					</div>
 				</div>
 
-					
-			</div> <!-- end data -->
+				<hr>
+				<h3>Type of sleep</h3>
+				<div>
+					<div class="cat_selection">
+						<input type="radio" name="typesleep" id="typesleep_night" value="night">Night
+						<input type="radio" name="typesleep" id="typesleep_nap" value="nap">Daytime Nap
+					</div>
+				</div>
+
+				<hr>
+				<h3>Type of dream</h3>
+				<div>
+					<div class="cat_selection">
+						<input type="radio" name="typedream" id="regulardream" value="regular">Regular
+						<input type="radio" name="typedream" id="luciddream" value="lucid">Lucid Dream
+					</div>
+				</div>
+
+				<hr>
+				<h3>Rate</h3>
+				<div>
+					<div class="cat_selection">
+
+					</div>
+				</div>
+			</div>
+
 		</div>  <!-- end main -->
 	</div>  <!-- end container -->
 </body>

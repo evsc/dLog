@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Dream Tags</title>
+	<title>Dream Tags & Characters</title>
 	<link rel="stylesheet" type="text/css" media="all" href="style.css" />
 	<script src="http://code.jquery.com/jquery-1.7.min.js"></script>
 	<script src="js/main.js"></script>
@@ -11,6 +11,7 @@
 
     $(document).ready(function(){
 	      start('tags');
+	      start('chars');
 	});
 
     </script>
@@ -20,8 +21,9 @@
 
 		<div id="header">
 			<div id="menu">
-				<a href="/one">new</a>
-				<a href="/all">all</a>
+				<a href="/one">new</a> / 
+				<a href="/all">all</a> / 
+				<a href="/tags">tags</a>
 			</div>
 		</div>
 
@@ -29,11 +31,10 @@
 			<h1>Dream Tags</h1>
 			<div id="log"></div>
 
-			<div id="data">
 
 				<div id="col">
 					<div id="tags" class="tagcloud">
-						<h3>tags</h3>
+						<h3>Tags</h3>
 						<ul>
 <!-- 							<li>flying</li>
 							<li>marsh</li> -->
@@ -42,7 +43,7 @@
 				</div>
 				<div id="col">
 					<div id="characters" class="tagcloud">
-						<h3>characters</h3>
+						<h3>Characters</h3>
 						<ul>
 <!-- 							<li>Douglas</li>
 							<li>Alma</li> -->
@@ -50,7 +51,6 @@
 					</div>
 				</div>
 
-			</div> <!-- end data -->
 		</div>  <!-- end main -->
 	</div>  <!-- end container -->
 </body>

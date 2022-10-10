@@ -22,48 +22,45 @@ h1, h2, h3, h4, h5, h6 { margin-bottom: 16px; }
 h1 { font-size: 36px; line-height: 40px;  }
 
 #container { padding: 20px;  }
-#main { padding-left: 100px; }
+#main {  }
 
 /* --- header --- */
-#menu { color: #999; float: left; width: 50px; }
+#menu { color: #999; padding-bottom:20px; text-transform: uppercase; }
 #menu a { text-decoration: none; color: #999; }
 #menu a:hover { color: #666; }
 
 /* --- cols --- */
 
-#data #col { margin-left: 0px; padding-left: 0px; padding-right: 50px; display: block; float: left; }
-#data #col:first-child { float: left; width: 520px; margin-left: 0px; }
-#data .cat_title { width: 120px; float: left; }
-#data .cat_selection { float: left; }
-#data .cat_add { float: left; }
+#mainbar { width: 600px; margin-left: 0px; padding-left: 0px; padding-right: 50px; display: block; float: left; }
+#sidebar { width: 200px; background-color:#dddddd; float: left; padding: 10px; }
+#col { width: 45%; float: left;}
 
 /* --- forms --- */
 form { }
 input, textarea { letter-spacing: 1px; resize: none; font-size: 16px; line-height: 16px; color: #000;  }
 
-#data input, #data textarea { padding: 5px; margin-bottom:15px; margin-right:5px; }
-#data #dream, #data input, #data textarea { border: solid 1px #f8f8f8; background-color: #eee; }
-#data.noEdit #dream, #data.noEdit input, #data.noEdit textarea {  border: 1px solid #aaa; background-color: #fff; }       
+input, textarea { padding: 5px; margin-bottom:15px; margin-right:5px; }
+#dream, input, textarea { border: solid 1px #f8f8f8; background-color: #eee; }
+.noEdit #dream, .noEdit input, .noEdit textarea {  border: 1px solid #aaa; background-color: #fff; }       
 
-#data.noEdit label, #data.noEdit .cat_title { color: #aaa; }
+.noEdit label, .noEdit .cat_title { color: #aaa; }
 
-#data #dream:hover, #data input:hover, #data textarea:hover { border: 1px solid #ddd;  }
-#data #dream:focus, #data input:focus, #data textarea:focus { border: 1px solid #4cf;  }
+#dream:hover, input:hover, textarea:hover { border: 1px solid #ddd;  }
+#dream:focus, input:focus, textarea:focus { border: 1px solid #4cf;  }
 
-#data.noEdit #dream:hover, #data.noEdit input:focus, #data.noEdit textarea:focus { border: 1px solid #ccc; }
-#data.noEdit #dream:focus, #data.noEdit input:hover, #data.noEdit textarea:hover { border: 1px solid #bbb; }
+.noEdit #dream:hover, .noEdit input:focus, .noEdit textarea:focus { border: 1px solid #ccc; }
+.noEdit #dream:focus, .noEdit input:hover, .noEdit textarea:hover { border: 1px solid #bbb; }
 
-#data #diary, #data #interpretation, #data #title { width: 500px; }
+#diary, #interpretation, #title { width: 100%; }
 
 /*#date #inputDate { width: 300px; background-color: #ff0; }*/
 
 
 #diary, #interpretation { height: 60px; }
-#data label, #data .cat_title { display: block; font-family: sans-serif; font-size: 12px; }
-#data > div { margin-bottom: 22px; }
-#submit,
-#buttons > div { border: 1px solid #666; background-color: #eee; color: #000; cursor:pointer;  }
-#submit { padding: 10px; display: inline-block; }
+label, .cat_title { display: block; font-family: sans-serif; font-size: 12px; }
+#mainbar > div { margin-bottom: 22px; }
+#submit, #buttons > div { border: 1px solid #666; background-color: #eee; color: #000; cursor:pointer;  }
+#submit { padding: 10px; margin-bottom: 20px; display: inline-block; }
 #buttons > div { padding: 2px; margin-right: 5px; min-width: 16px; text-align: center; font-size: 12px; }
 #submit:hover,
 #buttons > div:hover { background-color: #ccc; border: 1px solid #4cf; };
@@ -71,53 +68,60 @@ input, textarea { letter-spacing: 1px; resize: none; font-size: 16px; line-heigh
 #log { color: #f44; margin-bottom: 16px; }
 
 
-#data #dream { margin-bottom:15px; }
-#data #dream, .highlight, .inputText, .inputText textarea { width: 500px; height: 200px; }
-#data #dream { position: relative; height: 210px; width: 510px; }
-#data #dream .wrap { padding: 0px; }
-#data #dream .highlight, #data #dream .inputText { position: absolute; }
-#data #dream .highlight { overflow-x: hidden !important; overflow-y: auto !important; position: absolute !important; top: 0; }
-#data #dream textarea { /*overflow-y: scroll;*/ z-index: 999; border: none; padding: 0px; margin: 0px; font-size: 13px; 
+#dream { margin-bottom:15px; }
+#mainbar #dream, .highlight, .inputText, .inputText textarea { width: 100%; height: 300px; }
+#dream { position: relative;  }
+#dream .wrap { padding: 0px; }
+#dream .highlight, #dream .inputText { position: absolute; }
+#dream .highlight { overflow-x: hidden !important; overflow-y: auto !important; position: absolute !important; top: 0; }
+ #dream textarea { /*overflow-y: scroll;*/ z-index: 999; border: none; padding: 0px; margin: 0px; font-size: 13px; 
 	line-height: 20px; background-color: #f0f; background: transparent; border-radius: 0;   }	/*overflow: hidden;*/
-#data #dream textarea:focus, #dream textarea:hover { border: none; }
-#data #dream #echoer { width: auto !important; height: auto !important; overflow: hidden !important;
+#dream textarea:focus, #dream textarea:hover { border: none; }
+#dream #echoer { width: auto !important; height: auto !important; overflow: hidden !important;
 	z-index: 998; border: none; padding: 0px; margin: 0px; font-size: 13px; line-height: 20px; 
 	white-space: pre-wrap; word-wrap: break-word; color: transparent;  }
-#data #dream #echoer b span, #data #dream #echoer i span { display: inline-block; /*filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0); color: transparent;*/  }
-#data #dream #echoer b { z-index: 998; font-weight: normal; display: inline-block; background-color: #d5d5d5; }
-#data #dream #echoer i { z-index: 998; font-weight: normal; display: inline-block; background-color: #aef; }
-#data #dream .hide { display: none; }
+#dream #echoer b span, #dream #echoer i span { display: inline-block; /*filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0); color: transparent;*/  }
+#dream #echoer b { z-index: 998; font-weight: normal; display: inline-block; background-color: #d5d5d5; }
+#dream #echoer i { z-index: 998; font-weight: normal; display: inline-block; background-color: #aef; }
+#dream .hide { display: none; }
 /*#dream .echoer span { background-color: #ff5; }*/
 
 
 
-#data .taglist { display: block; float: left; width: 100px; padding-right:10px; }
-#data .tagcloud { width: 400px;  }
+.taglist { display: block;  }
 h3 { font-size: 20px; font-weight: normal; }
 .taglist ul, .tagcloud ul { list-style-type: none; margin-bottom: 20px; }
 .taglist ul li { display: table; margin-bottom: 7px; padding: 3px; }
 .tagcloud ul li { display: inline-block; margin-bottom: 7px; padding: 3px; margin-right:10px; }
-#characters.taglist ul li { background-color: #4cf;  }
-#tags.taglist ul li, #tags.tagcloud ul li { background-color: #ccc; }
+#characters.taglist ul li, #characters.tagcloud ul li { background-color: #4cf;  }
+.taglist ul li, .tagcloud ul li { background-color: #ccc; }
 .taglist ul li:hover, .tagcloud ul li:hover { color: #000; cursor: pointer;}
-#characters.taglist ul li:hover { background-color: #4dd5ff;  }
-#tags.taglist ul li:hover { background-color: #d5d5d5;  }
+#characters.taglist ul li:hover, #characters.tagcloud ul li:hover { background-color: #4dd5ff;  }
+#tags.taglist ul li:hover, #tags.tagcloud ul li:hover { background-color: #d5d5d5;  }
+
+
 
 /* --- archive --- */
+#chart_div {padding-bottom: 30px;}
 #archive {  }
-#archive #dream > div { float: left; margin: 3px;  }
+#archive #dream > div, #archive #sort_bar > div { float: left; margin: 3px;  }
 #archive #dream #buttons { margin: 0px; }
 #archive #dream #buttons > div { float: left; }
 
-#archive #dream { width: 820px; display: table; clear: both; background-color: #fff; margin-bottom: 3px; border: solid 1px #f4f4f4; }
+#archive #dream, #archive #sort_bar { width: 820px; display: table; clear: both; margin-bottom: 3px; }
+#archive #dream { background-color: #fff; border: solid 1px #f4f4f4; }
+#archive #sort_bar { font-family: Arial, sans-serif; }
+#sort_bar a, #sort_bar a:visited {text-decoration: none; color: #333;  }
+#sort_bar a:hover {text-decoration: none; color: #4cf;  }
+
 #archive #dream:hover { border: solid 1px #ddd;  }
-#archive #dream #date { width: 76px; font-family: Arial, sans-serif; }
-#archive #dream #title { width: 395px; font-size: 16px; background-color: #ddd; padding-left: 4px; }
+#archive #date { width: 76px; font-family: Arial, sans-serif; }
+#archive #title { width: 395px; padding-left: 4px; }
+#archive #dream #title { font-size: 16px; background-color: #ddd;  }
 #archive #dream #title:hover { color: #4cf; background-color: #eee; cursor:pointer; }
-#archive #dream #characters { width: 95px; font-family: Arial, sans-serif; }
-#archive #dream #tags { width: 60px; font-family: Arial, sans-serif; }
-#archive #dream #words { width: 80px; font-family: Arial, sans-serif; }
-#archive #dream #buttons { width: 65px; font-family: Arial, sans-serif; }
+#archive #characters { width: 95px; font-family: Arial, sans-serif; }
+#archive #tags { width: 60px; font-family: Arial, sans-serif; }
+#archive #words { width: 80px; font-family: Arial, sans-serif; }
+#archive #buttons { width: 65px; font-family: Arial, sans-serif; }
 #archive #dream #buttons > div { border: 0px; text-transform: upperCase; font-size: 10px; margin-top: 3px;}
 #archive #dream #buttons > div:hover { border: 0px; }
-

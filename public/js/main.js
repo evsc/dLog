@@ -5,7 +5,7 @@
 
 (function($){
 
-	url = window.location.host || 'evsc.no.de';
+	url = window.location.host;
 	console.log("url: "+url);
 	url = 'http://'+ url;
 	var pass;
@@ -52,6 +52,7 @@
 			doEdit(edit);
 
 			if(id) {
+				$('h1').text("Load dream");
 				$('#dream .inputText textarea').val('');
 
 				console.log("POST request");
@@ -64,10 +65,11 @@
 
 			} else {
 				clearForm();
+				$('h1').text("New dream");
 				$('#title').val('New Dream Title');
 				$('#submit').text('Submit Dream');
-				$("#data").data('tags', []);
-				$("#data").data('characters', []);
+				$("#sidebar").data('tags', []);
+				$("#sidebar").data('characters', []);
 			}
 
 			$('#submit').click( function() {
@@ -79,6 +81,7 @@
 					});
 				} else {
 					console.log("Make Editable");
+					$('h1').text("Edit dream");
 					edit = true;
 					doEdit(edit);
 				}
@@ -137,9 +140,9 @@
 		/* -------- tags and characters --------- */
 		if(space == 'tags'){
 
-			console.log("POST request all tags");
 			$('#tags.tagcloud ul').html('');
 
+			console.log("POST request all tags");
 			// load all tags into page
 			$.post(url, '{ "req" : "tags", "pass" : "'+pass+'" }', function(response) {
 				var tags = JSON.parse(response);
@@ -147,14 +150,43 @@
 				tags.allTags.sort(function(a, b) {
 				    return parseFloat(b.cnt) - parseFloat(a.cnt);
 				});
+				$("#tags h3").append(" ("+tags.allTags.length+")");
 				tags.allTags.forEach( function(t) {
 					$('#tags.tagcloud ul').append("<li data-name=" + t.name+">" + t.name + " (" + t.cnt+")</li>");
 				});
 			});
 
+
 			$("#tags ul li").live("click", function() {
 				var tagName = $(this).data('name');
 				window.location = "all?tag=" + tagName;
+			});
+
+
+		}
+
+		if(space == 'chars'){
+
+			$('#characters.tagcloud ul').html('');
+
+			console.log("POST request all characters");
+			// load all characters into page
+			$.post(url, '{ "req" : "chars", "pass" : "'+pass+'" }', function(response) {
+				var chars = JSON.parse(response);
+				// sort in descending order
+				chars.allChars.sort(function(a, b) {
+				    return parseFloat(b.cnt) - parseFloat(a.cnt);
+				});
+				$("#characters h3").append(" ("+chars.allChars.length+")");
+				chars.allChars.forEach( function(c) {
+					$('#characters.tagcloud ul').append("<li data-name=" + c.name+">@" + c.name + " (" + c.cnt+")</li>");
+				});
+			});
+
+
+			$("#characters ul li").live("click", function() {
+				var charName = $(this).data('name');
+				window.location = "all?character=" + charName;
 			});
 
 		}
@@ -172,23 +204,25 @@
 
 			var tag = $.urlParam('tag') || false;
 			var character = $.urlParam('character') || false;
+			var sort = $.urlParam('sort') || false;
 			if(tag) $('h1').append(" / tag: "+tag);
 			if(character) $('h1').append(" / character: "+character);
+
 
 			var firstMonth = new Date(2010,1,1);
 			firstMonth.setDate(1);
 			var lastMonth = new Date(Date.now());
 			lastMonth.setDate(1);
-			var tag_by_month = new Array(); 
+			var dream_by_month = new Array(); 
 			var m = 0;
 			for ( var dd = firstMonth; dd <= lastMonth; dd.setMonth(dd.getMonth() + 1)) {
-				tag_by_month[m] = {date: dd.getFullYear() +'/'+dd.getMonth(), count: 0 };
+				dream_by_month[m] = {date: dd.getFullYear() +'/'+dd.getMonth(), count: 0 };
 				m++;
 			};
 			var months = m;
 
 			// load all dreams into page
-			$.post(url, '{ "req" : "all", "tag" : "'+tag+'", "character" : "'+character+'", "pass" : "'+pass+'" }', function(response) {
+			$.post(url, '{ "req" : "all", "tag" : "'+tag+'", "character" : "'+character+'", "sort" : "'+sort+'", "pass" : "'+pass+'" }', function(response) {
 				var all = JSON.parse(response);
 				// console.log('all response '+all);
 
@@ -199,9 +233,9 @@
 					var dreamDate = new Date(d.date);
 					var dreamMonth = dreamDate.getFullYear() +'/'+dreamDate.getMonth();
 
-					for (var i=0; i<tag_by_month.length; i++) {
-						if (tag_by_month[i].date == dreamMonth) {
-							tag_by_month[i].count += 1;
+					for (var i=0; i<dream_by_month.length; i++) {
+						if (dream_by_month[i].date == dreamMonth) {
+							dream_by_month[i].count += 1;
 							break;
 						}
 					}
@@ -221,6 +255,8 @@
 				});
 				//.ready( function() { console.log("ready"); });
 
+				$('h1').append(" ("+all.allDreams.length+")");
+
 				$("#edit").live("click", function() {
 					var id = $(this).parent().parent().data('id');
 					console.log("click EDIT " + id);
@@ -228,10 +264,13 @@
 				});
 
 				$("#delete").live("click", function() {
-					console.log("delete dream " + $(this).parent().parent().data('id'));
-					deleteDream($(this).parent().parent().data('id'), $(this).parent().parent(), function(obj) {
-						$(obj).remove();
-					});
+					if(confirm("Are you sure you want to delete this dream?")) {
+		    			console.log("delete dream " + $(this).parent().parent().data('id'));
+						deleteDream($(this).parent().parent().data('id'), $(this).parent().parent(), function(obj) {
+							$(obj).remove();
+						});
+					}
+
 				})
 
 				$("#title").live("click", function() {
@@ -240,16 +279,17 @@
 					window.location = "one.html?id=" + id;
 				})
 
-				if (tag != false || character != false) {
 
-			        var chartData = [];
-			        for (var i=0; i<tag_by_month.length; i++) { // tag_by_month.length
-			        	chartData[i] = [tag_by_month[i].date, tag_by_month[i].count];
-			        };
+		        var chartData = [];
+		        for (var i=0; i<dream_by_month.length; i++) { 
+		        	chartData[i] = [dream_by_month[i].date, dream_by_month[i].count];
+		        };
 
-			        // console.log("draw chart for tag "+tag + "  or character "+character);
-			        drawChart(tag, chartData);
-				}
+				$(document).ready(function(){
+				    setTimeout(function() {
+			        	drawChart('Dreams', chartData);
+				    }, 500);
+				});
 
 			});
 
@@ -305,18 +345,20 @@
 
 		if(!v) {
 			$("#dream #echoer").removeClass('hide');
-			$('#data').addClass('noEdit');
+			$('#mainbar').addClass('noEdit');
 			$('input:radio[name=typesleep]').attr('disabled',true);
 			$('input:radio[name=typedream]').attr('disabled',true);
 			$('input, textarea').attr("readonly", "readonly");
+			$( "#inputDate" ).prop('disabled', true);
 			console.log("enabled");
 		} else {
 			$("#dream #echoer").addClass('hide');
-			$('#data').removeClass('noEdit');
+			$('#mainbar').removeClass('noEdit');
 			$('input:radio[name=typesleep]').attr('disabled',false);
 			$('input:radio[name=typedream]').attr('disabled',false);
 			$('input, textarea').removeAttr("readonly");
 			$('#submit').attr("disabled", "disabled");
+			$( "#inputDate" ).prop('disabled', false);
 			console.log("disabled");
 		}
 		// console.log("data has class noEdit: "+$('#data').hasClass('noEdit'));
@@ -357,9 +399,9 @@
 
 	function makeTags(id, tags) {
 		console.log("makeTags: "+JSON.stringify(tags));
-		$("#data").data(id, []);
+		$("#sidebar").data(id, []);
 
-		$('#' + id + '.taglist ul').html('');
+		$('#' + id + '.tagcloud ul').html('');
 		for(var i=0; i<tags.length; i++) {
 			addTag(id, tags[i].name);
 		}
@@ -369,7 +411,7 @@
 	function addTag(id, t) {
 		// check if Tag is already in the list
 		// console.log("addTag '" + t + "' to " + id);
-		var array = $("#data").data(id);
+		var array = $("#sidebar").data(id);
 		if(array) {
 			for(var i=0; i<array.length; i++) {
 				if(array[i].value == t) {
@@ -380,23 +422,25 @@
 		
 		t = t;
 		array.push( { "value" : t } );
-		$("#data").data(id, array);
+		$("#sidebar").data(id, array);
 		// console.log("array pushed " +t + " / " + JSON.stringify(array));
 		
-		$('#' + id + '.taglist ul').append("<li>" + t + "</li>");
+		$('#' + id + '.tagcloud ul').append("<li>" + t + "</li>");
 	}
 
 	function deleteTag(id, t) {
-		console.log(id + " delete "+ t);
-		$('#' + id + '.taglist ul li').each( function () {
-			if( $(this).text() == t) $(this).remove();
+		$('#' + id + '.tagcloud ul li').each( function () {
+			if( $(this).text() == t) {
+				$(this).remove();
+				console.log(id + " delete "+ t);
+			}
 			// console.log("cycle "+ $(this).text());
 		});
 	}
 
 	function cleanTags(id) {
-		var array = $("#data").data(id);	// { "value" : t }
-		// console.log(id +"-array: "+array);
+		var array = $("#sidebar").data(id);	// { "value" : t }
+		// console.log("cleanTags: " + id +"-array: "+array);
 		if(array) {
 			var i = array.length;
 			while(i--) {
@@ -406,7 +450,8 @@
 				var lookfor = (id === 'tags') ? '#' : '@';
 				lookfor += array[i].value;
 				var compText = $("#dream textarea").val();
-				var results = new RegExp(lookfor).test(compText);
+				// var results = new RegExp(lookfor).test(compText);
+				var results = new RegExp(`\\b${lookfor}\\b`, 'i').test(compText);
 				// console.log("results : "+results);
 				if(!results) {
 					// delete Tag from list
@@ -441,8 +486,8 @@
 		var interpretation = $('#interpretation').val();
 		var date = $('#inputDate').val();
 		var id = id || null;
-		var tags = $('#data').data('tags');
-		var characters = $('#data').data('characters');
+		var tags = $('#sidebar').data('tags');
+		var characters = $('#sidebar').data('characters');
 		var sleep_type = $('input:radio[name=typesleep]:checked').val();
 		var dream_type = $('input:radio[name=typedream]:checked').val();
 

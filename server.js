@@ -57,7 +57,9 @@ var server = http.createServer(function (request, response) {
 				util.log('dataJSON.pass '+dataJSON.pass + '   config.accesspw ' + config.accesspw);
 				if(dataJSON.pass == config.accesspw) {
 					switch(dataJSON.req) {
-						case 'all' : 	handle.all(db,dataJSON.tag,dataJSON.character,response);
+						case 'all' : 	handle.all(db,dataJSON.tag,dataJSON.character,dataJSON.sort,response);
+										break;
+						case 'chars' : 	handle.getChars(db,response);
 										break;
 						case 'tags' : 	handle.getTags(db,response);
 										break;
