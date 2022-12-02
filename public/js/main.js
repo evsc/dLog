@@ -380,10 +380,18 @@
 		$('#title').val(dream.title);
 		$('#interpretation').val(dream.interpretation);
 		$('#inputDate').val(formatDate(dream.date));
+		$('#score').html("score: "+(dream.sentiment.score).toFixed(2));
+		$('#magnitude').html("magnitude: "+(dream.sentiment.magnitude).toFixed(2));
+
 		var tags =  dream.tags;
 		var characters = dream.characters;
+		var categories = dream.categories;
 		makeTags('tags', tags);
 		makeTags('characters', characters);
+		makeTags('categories', categories);
+		// var entities = dream.entities;
+		// makeEntities('entities', entities);
+
 	}
 
 	function formatDate(dday) {
@@ -396,6 +404,44 @@
 		var y = date.getFullYear();
 		return m + '/' + d + '/' + y;
 	}
+
+
+
+	// function makeEntities(id, entities) {
+	// 	// // PERSON, LOCATION, ORGANIZATION, EVENT, OTHER
+	// 	$('#' + id).html('');
+	// 	makeTypeEntities(id,'PERSON', entities);
+	// 	makeTypeEntities(id,'LOCATION', entities);
+	// 	makeTypeEntities(id,'ORGANIZATION', entities);
+	// 	makeTypeEntities(id,'EVENT', entities);
+	// 	makeTypeEntities(id,'WORK_OF_ART', entities);
+	// 	makeTypeEntities(id,'CONSUMER_GOOD', entities);
+	// 	makeTypeEntities(id,'OTHER', entities);
+	// 	makeTypeEntities(id,'PHONE_NUMBER', entities);
+	// 	makeTypeEntities(id,'ADDRESS', entities);
+	// 	makeTypeEntities(id,'DATE', entities);
+	// 	makeTypeEntities(id,'NUMBER', entities);
+	// 	makeTypeEntities(id,'PRICE ', entities);
+	// 	makeTypeEntities(id,'UNKNOWN ', entities);
+	// 	// makeTypeEntities(id,'PERSON', entities);
+	// }
+
+	// function makeTypeEntities(id, type, entities) {
+	// 	var list = [];
+	// 	for(var i=0; i<entities.length; i++) {
+	// 		if(entities[i].type == type && entities[i].salience > 0.03 && list.indexOf(entities[i].name)==-1) {
+	// 			list.push(entities[i].name);
+	// 		}
+	// 	}
+	// 	if(list.length>0) {
+	// 		$('#' + id + '.tagcloud').append(type);
+	// 		var innerList = "";
+	// 		for(var j=0; j<list.length; j++) {
+	// 			innerList += "<li>" + list[j] + "</li>";
+	// 		}
+	// 		$('#' + id + '.tagcloud').append("<ul>" + innerList + "</ul>");
+	// 	}
+	// }
 
 	function makeTags(id, tags) {
 		console.log("makeTags: "+JSON.stringify(tags));

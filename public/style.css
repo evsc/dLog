@@ -32,7 +32,7 @@ h1 { font-size: 36px; line-height: 40px;  }
 /* --- cols --- */
 
 #mainbar { width: 600px; margin-left: 0px; padding-left: 0px; padding-right: 50px; display: block; float: left; }
-#sidebar { width: 200px; background-color:#dddddd; float: left; padding: 10px; }
+#sidebar { width: 200px; background-color:#dddddd; float: left; padding: 10px; margin-right:10px;}
 #col { width: 45%; float: left;}
 
 /* --- forms --- */
@@ -87,6 +87,8 @@ label, .cat_title { display: block; font-family: sans-serif; font-size: 12px; }
 /*#dream .echoer span { background-color: #ff5; }*/
 
 
+#score, #magnitude { font-size: 20px; background: #fff; }
+
 
 .taglist { display: block;  }
 h3 { font-size: 20px; font-weight: normal; }
@@ -94,11 +96,12 @@ h3 { font-size: 20px; font-weight: normal; }
 .taglist ul li { display: table; margin-bottom: 7px; padding: 3px; }
 .tagcloud ul li { display: inline-block; margin-bottom: 7px; padding: 3px; margin-right:10px; }
 #characters.taglist ul li, #characters.tagcloud ul li { background-color: #4cf;  }
+#categories.tagcloud ul li  { background-color: #fcf; }
+#entities.tagcloud ul li { background-color: #aef; }
 .taglist ul li, .tagcloud ul li { background-color: #ccc; }
 .taglist ul li:hover, .tagcloud ul li:hover { color: #000; cursor: pointer;}
 #characters.taglist ul li:hover, #characters.tagcloud ul li:hover { background-color: #4dd5ff;  }
 #tags.taglist ul li:hover, #tags.tagcloud ul li:hover { background-color: #d5d5d5;  }
-
 
 
 /* --- archive --- */

@@ -6,6 +6,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@google-cloud/language": "^1.2.0",
     "mongoose": "6.6.1",
     "node-static": "0.7.11"
   },
