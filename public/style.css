@@ -87,7 +87,7 @@ label, .cat_title { display: block; font-family: sans-serif; font-size: 12px; }
 /*#dream .echoer span { background-color: #ff5; }*/
 
 
-#score, #magnitude { font-size: 20px; background: #fff; }
+/*#score, #magnitude { font-size: 20px; background: #fff; }*/
 
 
 .taglist { display: block;  }
@@ -111,7 +111,7 @@ h3 { font-size: 20px; font-weight: normal; }
 #archive #dream #buttons { margin: 0px; }
 #archive #dream #buttons > div { float: left; }
 
-#archive #dream, #archive #sort_bar { width: 820px; display: table; clear: both; margin-bottom: 3px; }
+#archive #dream, #archive #sort_bar { width: 900px; display: table; clear: both; margin-bottom: 3px; }
 #archive #dream { background-color: #fff; border: solid 1px #f4f4f4; }
 #archive #sort_bar { font-family: Arial, sans-serif; }
 #sort_bar a, #sort_bar a:visited {text-decoration: none; color: #333;  }
@@ -122,9 +122,11 @@ h3 { font-size: 20px; font-weight: normal; }
 #archive #title { width: 395px; padding-left: 4px; }
 #archive #dream #title { font-size: 16px; background-color: #ddd;  }
 #archive #dream #title:hover { color: #4cf; background-color: #eee; cursor:pointer; }
-#archive #characters { width: 95px; font-family: Arial, sans-serif; }
-#archive #tags { width: 60px; font-family: Arial, sans-serif; }
-#archive #words { width: 80px; font-family: Arial, sans-serif; }
+#archive #dream #score, #archive #dream #comparative, #archive #dream #magnitude { background-color: #dfd;  }
+#archive #score, #archive #comparative, #archive #magnitude { width: 50px;  }
+#archive #characters { width: 45px; font-family: Arial, sans-serif; }
+#archive #tags { width: 45px; font-family: Arial, sans-serif; }
+#archive #words { width: 70px; font-family: Arial, sans-serif; }
 #archive #buttons { width: 65px; font-family: Arial, sans-serif; }
 #archive #dream #buttons > div { border: 0px; text-transform: upperCase; font-size: 10px; margin-top: 3px;}
 #archive #dream #buttons > div:hover { border: 0px; }

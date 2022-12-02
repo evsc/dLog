@@ -243,9 +243,15 @@
 					h = '<div id="dream" class="drC" data-id="'+ d._id +'">';
 					h += '<div id="date">' + formatDate(d.date) + '</div>';
 					h += '<div id="title">' + d.title + '</div>';
-					h += '<div id="characters">' + 'characters (' + d.char_cnt+')' + '</div>';
-					h += '<div id="tags">' + 'tags ('+d.tag_cnt+')' + '</div>';
-					h += '<div id="words">' + 'words ('+d.word_cnt+')' + '</div>';
+					h += '<div id="characters">' + 'C (' + d.char_cnt+')' + '</div>';
+					h += '<div id="tags">' + 'T ('+d.tag_cnt+')' + '</div>';
+					h += '<div id="words">' + 'W ('+d.word_cnt+')' + '</div>';
+					h += '<div id="score">' + 'S: '+d.sentiment.score+'</div>';
+					h += '<div id="comparative">' + 'C: '+d.sentiment.comparative.toFixed(2)+'</div>';
+					h += '<div id="magnitude">' + 'M: '+(d.sentiment.magnitude*100).toFixed(0)+'%</div>';
+					// h += '<div id="score">' + d.sentiment.score+'</div>';
+					// h += '<div id="comparative">' +d.sentiment.comparative.toFixed(2)+'</div>';
+					// h += '<div id="magnitude">' +(d.sentiment.magnitude*100).toFixed(0)+'%</div>';
 					h += '<div id="buttons">';
 					h += '<div id="edit">edit</div>';
 					h += '<div id="delete">x</div>';
@@ -270,7 +276,6 @@
 							$(obj).remove();
 						});
 					}
-
 				})
 
 				$("#title").live("click", function() {
@@ -380,15 +385,16 @@
 		$('#title').val(dream.title);
 		$('#interpretation').val(dream.interpretation);
 		$('#inputDate').val(formatDate(dream.date));
-		$('#score').html("score: "+(dream.sentiment.score).toFixed(2));
-		$('#magnitude').html("magnitude: "+(dream.sentiment.magnitude).toFixed(2));
+		$('#score').html("Score: "+(dream.sentiment.score).toFixed(0));
+		$('#comparative').html("Comparative: "+(dream.sentiment.comparative).toFixed(3));
+		$('#magnitude').html("Magnitude: "+(dream.sentiment.magnitude*100).toFixed(0)+"%");
 
 		var tags =  dream.tags;
 		var characters = dream.characters;
-		var categories = dream.categories;
+		// var categories = dream.categories;
 		makeTags('tags', tags);
 		makeTags('characters', characters);
-		makeTags('categories', categories);
+		// makeTags('categories', categories);
 		// var entities = dream.entities;
 		// makeEntities('entities', entities);
 
@@ -451,7 +457,6 @@
 		for(var i=0; i<tags.length; i++) {
 			addTag(id, tags[i].name);
 		}
-
 	}
 
 	function addTag(id, t) {
