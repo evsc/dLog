@@ -20,6 +20,7 @@ textarea, input, select {
 body { background-color: #fff; color: #444; font-family: Georgia, Times New Roman, serif; font-size: 12px; letter-spacing: 1px; }
 h1, h2, h3, h4, h5, h6 { margin-bottom: 16px; }
 h1 { font-size: 36px; line-height: 40px;  }
+hr { margin-bottom:15px; }
 
 #container { padding: 20px;  }
 #main {  }
@@ -34,6 +35,9 @@ h1 { font-size: 36px; line-height: 40px;  }
 #mainbar { width: 600px; margin-left: 0px; padding-left: 0px; padding-right: 50px; display: block; float: left; }
 #sidebar { width: 200px; background-color:#dddddd; float: left; padding: 10px; margin-right:10px;}
 #col { width: 45%; float: left;}
+#sidebar .content div { height: 16px; grid-template-columns: 18px auto; display: grid; gap: 0px; }
+/*#sidebar .content input[type=checkbox][disabled] { outline:1px solid red; }*/
+
 
 /* --- forms --- */
 form { }
@@ -111,7 +115,7 @@ h3 { font-size: 20px; font-weight: normal; }
 #archive #dream #buttons { margin: 0px; }
 #archive #dream #buttons > div { float: left; }
 
-#archive #dream, #archive #sort_bar { width: 900px; display: table; clear: both; margin-bottom: 3px; }
+#archive #dream, #archive #sort_bar { width: 950px; display: table; clear: both; margin-bottom: 3px; }
 #archive #dream { background-color: #fff; border: solid 1px #f4f4f4; }
 #archive #sort_bar { font-family: Arial, sans-serif; }
 #sort_bar a, #sort_bar a:visited {text-decoration: none; color: #333;  }
@@ -119,11 +123,11 @@ h3 { font-size: 20px; font-weight: normal; }
 
 #archive #dream:hover { border: solid 1px #ddd;  }
 #archive #date { width: 76px; font-family: Arial, sans-serif; }
-#archive #title { width: 395px; padding-left: 4px; }
+#archive #title { width: 380px; padding-left: 4px; }
 #archive #dream #title { font-size: 16px; background-color: #ddd;  }
 #archive #dream #title:hover { color: #4cf; background-color: #eee; cursor:pointer; }
 #archive #dream #score, #archive #dream #comparative, #archive #dream #magnitude { background-color: #dfd;  }
-#archive #score, #archive #comparative, #archive #magnitude { width: 50px;  }
+#archive #score, #archive #comparative, #archive #magnitude { width: 55px;  }
 #archive #characters { width: 45px; font-family: Arial, sans-serif; }
 #archive #tags { width: 45px; font-family: Arial, sans-serif; }
 #archive #words { width: 70px; font-family: Arial, sans-serif; }

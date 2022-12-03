@@ -128,12 +128,6 @@
 				window.location = "all?character=" + charName;
 			});
 
-			$("#typesleep_night").live("click", function() {
-				var sleepName = $(this).value();
-				alert(sleepName);
-				window.location = "all?sleep=" + sleepName;
-			});
-
 		}
 
 
@@ -355,6 +349,13 @@
 			$('input:radio[name=typedream]').attr('disabled',true);
 			$('input, textarea').attr("readonly", "readonly");
 			$( "#inputDate" ).prop('disabled', true);
+			$('input[type="checkbox"]').prop('disabled', true);
+			// $('#content_upcoming').prop('checked', dream.content_upcoming);
+			// $('#content_stressful').prop('checked', dream.content_stressful);
+			// $('#content_surreal').prop('checked', dream.content_surreal);
+			// $('#content_scary').prop('checked', dream.content_scary);
+			// $('#content_romantic').prop('checked', dream.content_romantic);
+			// $('#content_sexual').prop('checked', dream.content_sexual);
 			console.log("enabled");
 		} else {
 			$("#dream #echoer").addClass('hide');
@@ -364,6 +365,7 @@
 			$('input, textarea').removeAttr("readonly");
 			$('#submit').attr("disabled", "disabled");
 			$( "#inputDate" ).prop('disabled', false);
+			$('input[type="checkbox"]').prop('disabled', false);
 			console.log("disabled");
 		}
 		// console.log("data has class noEdit: "+$('#data').hasClass('noEdit'));
@@ -388,6 +390,13 @@
 		$('#score').html("Score: "+(dream.sentiment.score).toFixed(0));
 		$('#comparative').html("Comparative: "+(dream.sentiment.comparative).toFixed(3));
 		$('#magnitude').html("Magnitude: "+(dream.sentiment.magnitude*100).toFixed(0)+"%");
+		$('#content_recent').prop('checked', dream.content_recent);
+		$('#content_upcoming').prop('checked', dream.content_upcoming);
+		$('#content_stressful').prop('checked', dream.content_stressful);
+		$('#content_surreal').prop('checked', dream.content_surreal);
+		$('#content_scary').prop('checked', dream.content_scary);
+		$('#content_romantic').prop('checked', dream.content_romantic);
+		$('#content_sexual').prop('checked', dream.content_sexual);
 
 		var tags =  dream.tags;
 		var characters = dream.characters;
@@ -539,8 +548,15 @@
 		var id = id || null;
 		var tags = $('#sidebar').data('tags');
 		var characters = $('#sidebar').data('characters');
-		var sleep_type = $('input:radio[name=typesleep]:checked').val();
-		var dream_type = $('input:radio[name=typedream]:checked').val();
+		var content_recent = $('#content_recent').prop('checked');
+		var content_upcoming = $('#content_upcoming').prop('checked');
+		var content_stressful = $('#content_stressful').prop('checked');
+		var content_surreal = $('#content_surreal').prop('checked');
+		var content_scary = $('#content_scary').prop('checked');
+		var content_romantic = $('#content_romantic').prop('checked');
+		var content_sexual = $('#content_sexual').prop('checked');
+		// var sleep_type = $('input:radio[name=typesleep]:checked').val();
+		// var dream_type = $('input:radio[name=typedream]:checked').val();
 
 		var dreamData = { req : handle, data : {
 			"dream" : dream,
@@ -551,8 +567,15 @@
 			"id" : id,
 			"tags" : tags,
 			"characters" : characters,
-			"sleep_type" : sleep_type,
-			"dream_type" : dream_type
+			"content_recent" : content_recent,
+			"content_upcoming" : content_upcoming,
+			"content_stressful" : content_stressful,
+			"content_surreal" : content_surreal,
+			"content_scary" : content_scary,
+			"content_romantic" : content_romantic,
+			"content_sexual" : content_sexual
+			// "sleep_type" : sleep_type,
+			// "dream_type" : dream_type
 		}, pass : pass};
 
 		return dreamData;

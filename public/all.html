@@ -37,6 +37,12 @@
 
 	    $(document).ready(function(){
 		      start('all');
+
+		      // var currentURL = window.location.search;
+
+		      // console.log($("#sort_bar a").length);
+		      // $("#sort_bar a").attr('href', currentURL + $("#sort_bar a").attr('href'));
+	
 		});
 
     </script>
@@ -62,19 +68,21 @@
 
 			<div id="archive">
 				<div id="sort_bar">
-					<div id="date"><a href="all?sort=date1" title="ascending"> ▲ </a> <a href="all?sort=date0" title="descending"> ▼ </a></div>
+					<div id="date"><a href="&sort=date1"> ▲ </a> <a href="&sort=date0"> ▼ </a></div>
 
-					<div id="title"><a href="all?sort=title1" title="ascending"> ▲ </a> <a href="all?sort=title0" title="descending"> ▼ </a></div>
+					<div id="title"><a href="?sort=title1"> ▲ </a> <a href="?sort=title0"> ▼ </a></div>
 
-					<div id="characters"><a href="all?sort=chars1" title="ascending"> ▲ </a> <a href="all?sort=chars0" title="descending"> ▼ </a></div>
+					<div id="characters" title="Characters"><a href="all?sort=chars1"> ▲ </a> <a href="all?sort=chars0"> ▼ </a></div>
 
-					<div id="tags"><a href="all?sort=tags1" title="ascending"> ▲ </a> <a href="all?sort=tags0" title="descending"> ▼ </a></div>
+					<div id="tags" title="Tags"><a href="all?sort=tags1"> ▲ </a> <a href="all?sort=tags0"> ▼ </a></div>
 
-					<div id="words"><a href="all?sort=words1" title="ascending"> ▲ </a> <a href="all?sort=words0" title="descending"> ▼ </a></div>
+					<div id="words" title="Words"><a href="all?sort=words1"> ▲ </a> <a href="all?sort=words0"> ▼ </a></div>
 
-					<div id="score">Score</div>
-					<div id="comparative">Comp</div>
-					<div id="magnitude">Magn</div>
+					<div id="score" title="Sentiment Analysis Score: added up sum of positives and negatives"><a href="all?sort=score1"> ▲ </a> <a href="all?sort=score0"> ▼ </a></div>
+					
+					<div id="comparative" title="Sentiment Analysis Comparative: score divided by number of words in text"><a href="all?sort=comp1"> ▲ </a> <a href="all?sort=comp0"> ▼ </a></div>
+					
+					<div id="magnitude" title="Sentiment Analysis Magnitude: number of words with positive or negative connotations divided by total number of words"><a href="all?sort=magn1"> ▲ </a> <a href="all?sort=magn0"> ▼ </a></div>
 
 					<div id="buttons"></div>
 				</div>

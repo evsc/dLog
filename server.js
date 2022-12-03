@@ -17,6 +17,7 @@ var db = require('./lib/db.js').initialize(
 	config.db,
 	function() {
 		util.log("DB success");
+		// handle.updateAllDreams(db);	// run sentiment analysis on all old dreams
 	},
 	function() {
 		util.log("DB failure");
@@ -126,3 +127,4 @@ var server = http.createServer(function (request, response) {
 
 server.listen(port);
 util.log("Server listening on port "+port);
+
