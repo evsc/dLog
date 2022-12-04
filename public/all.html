@@ -19,12 +19,12 @@
 
 			// console.log("chartData: "+chartData);
 	        var data = new google.visualization.DataTable();
-	        data.addColumn('string', 'Dreams');
-	        data.addColumn('number', tagName);
+	        data.addColumn('string', 'Date');
+	        data.addColumn('number', 'Dreams');
 			data.addRows( chartData );
 
 	        var options = {
-	          width: 780, height: 200,
+	          width: 980, height: 200,
 	          legend: 'none',
 	          chartArea:{left:50,top:20,width:"100%",height:"65%"}
 	          // title: 'Tag: x',
@@ -77,6 +77,14 @@
 					<div id="tags" title="Tags"><a href="all?sort=tags1"> ▲ </a> <a href="all?sort=tags0"> ▼ </a></div>
 
 					<div id="words" title="Words"><a href="all?sort=words1"> ▲ </a> <a href="all?sort=words0"> ▼ </a></div>
+
+					<div id="content" title="Recent event">Content Flags</div>
+<!-- 					<div id="content" title="Upcoming event"></div>
+					<div id="content" title="Stressful"></div>
+					<div id="content" title="Surreal"></div>
+					<div id="content" title="Scary"></div>
+					<div id="content" title="Romantic"></div>
+					<div id="content" title="Sexual"></div> -->
 
 					<div id="score" title="Sentiment Analysis Score: added up sum of positives and negatives"><a href="all?sort=score1"> ▲ </a> <a href="all?sort=score0"> ▼ </a></div>
 					

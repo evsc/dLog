@@ -60,6 +60,8 @@ var server = http.createServer(function (request, response) {
 					switch(dataJSON.req) {
 						case 'all' : 	handle.all(db,dataJSON.tag,dataJSON.character,dataJSON.sort,response);
 										break;
+						case 'viz' : 	handle.viz(db,response);
+										break;
 						case 'chars' : 	handle.getChars(db,response);
 										break;
 						case 'tags' : 	handle.getTags(db,response);
@@ -109,6 +111,9 @@ var server = http.createServer(function (request, response) {
 					break;
 				case '/all':
 					file.serveFile('/all.html', 500, {}, request, response);
+					break;
+				case '/viz':
+					file.serveFile('/viz.html', 500, {}, request, response);
 					break;
 				default :
 					file.serve(request, response, function(err) { 

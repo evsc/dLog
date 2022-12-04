@@ -186,6 +186,44 @@
 		}
 
 
+		if(space == 'viz') {
+
+			// console.log("main - viz");
+
+			$.post(url, '{ "req" : "viz", "pass" : "'+pass+'" }', function(response) {
+				var all = JSON.parse(response);
+				// console.log('all response '+all);
+				var chartData = [];
+				var i = 0;
+
+				all.allDreams.forEach( function(d) {
+
+					var dreamDate = new Date(d.date);
+					var todayDate = new Date();
+					var diff = Math.round((todayDate - dreamDate) / (1000 * 60 * 60 * 24));
+					// var dreamMonth = dreamDate.getFullYear() +'/'+dreamDate.getMonth();
+					var newDate = new Date(dreamDate.getFullYear(), dreamDate.getMonth(), dreamDate.getDate());
+					// chartData[i] = [dreamDate.getTime()/(1000 * 60 * 60 * 24), d.sentiment.score];
+					chartData[i] = [dreamDate.getTime(), d.sentiment.comparative];
+					i++;
+
+				});
+
+				// console.log(chartData);
+
+				$(document).ready(function(){
+				    setTimeout(function() {
+			        	drawChart(chartData);
+				    }, 500);
+				});
+
+			});
+
+
+
+			
+		}
+
 
 		/* -------- all --------- */
 		if(space == 'all') {
@@ -240,6 +278,13 @@
 					h += '<div id="characters">' + 'C (' + d.char_cnt+')' + '</div>';
 					h += '<div id="tags">' + 'T ('+d.tag_cnt+')' + '</div>';
 					h += '<div id="words">' + 'W ('+d.word_cnt+')' + '</div>';
+					h += '<div id="content" '+(d.content.recent?'class="content1" title="Recent event"':'')+'> </div>';
+					h += '<div id="content" '+(d.content.upcoming?'class="content1 title="Upcoming event""':'')+'> </div>';
+					h += '<div id="content" '+(d.content.stressful?'class="content1 title="Stressful""':'')+'> </div>';
+					h += '<div id="content" '+(d.content.surreal?'class="content1" title="Surreal"':'')+'> </div>';
+					h += '<div id="content" '+(d.content.scary?'class="content1" title="Scary"':'')+'> </div>';
+					h += '<div id="content" '+(d.content.romantic?'class="content1" title="Romantic"':'')+'> </div>';
+					h += '<div id="content" '+(d.content.sexual?'class="content1" title="Sexual"':'')+'> </div>';
 					h += '<div id="score">' + 'S: '+d.sentiment.score+'</div>';
 					h += '<div id="comparative">' + 'C: '+d.sentiment.comparative.toFixed(2)+'</div>';
 					h += '<div id="magnitude">' + 'M: '+(d.sentiment.magnitude*100).toFixed(0)+'%</div>';
@@ -350,12 +395,6 @@
 			$('input, textarea').attr("readonly", "readonly");
 			$( "#inputDate" ).prop('disabled', true);
 			$('input[type="checkbox"]').prop('disabled', true);
-			// $('#content_upcoming').prop('checked', dream.content_upcoming);
-			// $('#content_stressful').prop('checked', dream.content_stressful);
-			// $('#content_surreal').prop('checked', dream.content_surreal);
-			// $('#content_scary').prop('checked', dream.content_scary);
-			// $('#content_romantic').prop('checked', dream.content_romantic);
-			// $('#content_sexual').prop('checked', dream.content_sexual);
 			console.log("enabled");
 		} else {
 			$("#dream #echoer").addClass('hide');
@@ -390,13 +429,13 @@
 		$('#score').html("Score: "+(dream.sentiment.score).toFixed(0));
 		$('#comparative').html("Comparative: "+(dream.sentiment.comparative).toFixed(3));
 		$('#magnitude').html("Magnitude: "+(dream.sentiment.magnitude*100).toFixed(0)+"%");
-		$('#content_recent').prop('checked', dream.content_recent);
-		$('#content_upcoming').prop('checked', dream.content_upcoming);
-		$('#content_stressful').prop('checked', dream.content_stressful);
-		$('#content_surreal').prop('checked', dream.content_surreal);
-		$('#content_scary').prop('checked', dream.content_scary);
-		$('#content_romantic').prop('checked', dream.content_romantic);
-		$('#content_sexual').prop('checked', dream.content_sexual);
+		$('#content_recent').prop('checked', dream.content.recent);
+		$('#content_upcoming').prop('checked', dream.content.upcoming);
+		$('#content_stressful').prop('checked', dream.content.stressful);
+		$('#content_surreal').prop('checked', dream.content.surreal);
+		$('#content_scary').prop('checked', dream.content.scary);
+		$('#content_romantic').prop('checked', dream.content.romantic);
+		$('#content_sexual').prop('checked', dream.content.sexual);
 
 		var tags =  dream.tags;
 		var characters = dream.characters;
@@ -548,13 +587,15 @@
 		var id = id || null;
 		var tags = $('#sidebar').data('tags');
 		var characters = $('#sidebar').data('characters');
-		var content_recent = $('#content_recent').prop('checked');
-		var content_upcoming = $('#content_upcoming').prop('checked');
-		var content_stressful = $('#content_stressful').prop('checked');
-		var content_surreal = $('#content_surreal').prop('checked');
-		var content_scary = $('#content_scary').prop('checked');
-		var content_romantic = $('#content_romantic').prop('checked');
-		var content_sexual = $('#content_sexual').prop('checked');
+		var content = {
+			recent: $('#content_recent').prop('checked'),
+			upcoming: $('#content_upcoming').prop('checked'),
+			stressful: $('#content_stressful').prop('checked'),
+			surreal: $('#content_surreal').prop('checked'),
+			scary: $('#content_scary').prop('checked'),
+			romantic: $('#content_romantic').prop('checked'),
+			sexual: $('#content_sexual').prop('checked')
+		};
 		// var sleep_type = $('input:radio[name=typesleep]:checked').val();
 		// var dream_type = $('input:radio[name=typedream]:checked').val();
 
@@ -567,13 +608,7 @@
 			"id" : id,
 			"tags" : tags,
 			"characters" : characters,
-			"content_recent" : content_recent,
-			"content_upcoming" : content_upcoming,
-			"content_stressful" : content_stressful,
-			"content_surreal" : content_surreal,
-			"content_scary" : content_scary,
-			"content_romantic" : content_romantic,
-			"content_sexual" : content_sexual
+			"content" : content
 			// "sleep_type" : sleep_type,
 			// "dream_type" : dream_type
 		}, pass : pass};
