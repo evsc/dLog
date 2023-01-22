@@ -199,11 +199,10 @@
 				all.allDreams.forEach( function(d) {
 
 					var dreamDate = new Date(d.date);
-					var todayDate = new Date();
-					var diff = Math.round((todayDate - dreamDate) / (1000 * 60 * 60 * 24));
+					// var todayDate = new Date();
+					// var diff = Math.round((todayDate - dreamDate) / (1000 * 60 * 60 * 24));
 					// var dreamMonth = dreamDate.getFullYear() +'/'+dreamDate.getMonth();
-					var newDate = new Date(dreamDate.getFullYear(), dreamDate.getMonth(), dreamDate.getDate());
-					// chartData[i] = [dreamDate.getTime()/(1000 * 60 * 60 * 24), d.sentiment.score];
+					// var newDate = new Date(dreamDate.getFullYear(), dreamDate.getMonth(), dreamDate.getDate());
 					chartData[i] = [dreamDate.getTime(), d.sentiment.comparative];
 					i++;
 
@@ -225,6 +224,58 @@
 		}
 
 
+		if(space == 'viz_tags') {
+
+			$.post(url, '{ "req" : "viz_tags", "pass" : "'+pass+'" }', function(response) {
+				var all = JSON.parse(response);
+				// console.log('all response '+all);
+				var chartData = [];
+				var i = 0;
+				// var style = "point { size: 12; shape-type: circle; fill-color: #FFFFFF; color: #CCCCCC }";
+
+				all.allTags.forEach( function(t) {
+					var cnt = t.cnt;
+					if(cnt>10) cnt = 10;
+					cnt = 0;
+					chartData[i] = [ t.sentiment.magnitude, t.sentiment.comparative, "point { size: " +cnt+ "; }", t.name];
+					i++;
+				});
+
+				$(document).ready(function(){
+				    setTimeout(function() {
+			        	drawTagChart(chartData);
+				    }, 750);
+				});
+
+			});
+			
+		}
+
+		if(space == 'viz_chars') {
+
+			$.post(url, '{ "req" : "viz_chars", "pass" : "'+pass+'" }', function(response) {
+				var all = JSON.parse(response);
+				var chartData = [];
+				var i = 0;
+
+				all.allChars.forEach( function(c) {
+					chartData[i] = [ c.sentiment.magnitude, c.sentiment.comparative, "point { size: 0; }", c.name];
+					i++;
+				});
+
+				// util.log("character to chartData ");
+
+				$(document).ready(function(){
+				    setTimeout(function() {
+			        	drawCharacterChart(chartData);
+				    }, 1000);
+				});
+
+			});
+			
+		}
+
+
 		/* -------- all --------- */
 		if(space == 'all') {
 
@@ -240,8 +291,36 @@
 			if(tag) $('h1').append(" / tag: "+tag);
 			if(character) $('h1').append(" / character: "+character);
 
+			// content flags 
+			var cflags = {
+				recent: parseInt($.urlParam('cf1'))==1,
+				upcoming: parseInt($.urlParam('cf2'))==1,
+				stressful: parseInt($.urlParam('cf3'))==1,
+				surreal: parseInt($.urlParam('cf4'))==1,
+				scary: parseInt($.urlParam('cf5'))==1,
+				romantic: parseInt($.urlParam('cf6'))==1,
+				sexual: parseInt($.urlParam('cf7'))==1
+			};
 
-			var firstMonth = new Date(2010,1,1);
+
+			$('#content_recent').prop('checked', cflags.recent);
+			$('#content_upcoming').prop('checked', cflags.upcoming);
+			$('#content_stressful').prop('checked', cflags.stressful);
+			$('#content_surreal').prop('checked', cflags.surreal);
+			$('#content_scary').prop('checked', cflags.scary);
+			$('#content_romantic').prop('checked', cflags.romantic);
+			$('#content_sexual').prop('checked', cflags.sexual);
+
+			cflagstring = "";
+			cflagstring += cflags.recent ? 1 : 0;
+			cflagstring += cflags.upcoming ? 1 : 0;
+			cflagstring += cflags.stressful ? 1 : 0;
+			cflagstring += cflags.surreal ? 1 : 0;
+			cflagstring += cflags.scary ? 1 : 0;
+			cflagstring += cflags.romantic ? 1 : 0;
+			cflagstring += cflags.sexual ? 1 : 0;
+
+			var firstMonth = new Date(2003,1,1);
 			firstMonth.setDate(1);
 			var lastMonth = new Date(Date.now());
 			lastMonth.setDate(1);
@@ -253,8 +332,11 @@
 			};
 			var months = m;
 
+			var count_cflags = new Array();
+			for( var f = 0; f<7; f++) count_cflags[f]=0;
+
 			// load all dreams into page
-			$.post(url, '{ "req" : "all", "tag" : "'+tag+'", "character" : "'+character+'", "sort" : "'+sort+'", "pass" : "'+pass+'" }', function(response) {
+			$.post(url, '{ "req" : "all", "tag" : "'+tag+'", "character" : "'+character+'", "sort" : "'+sort+'", "pass" : "'+pass+'", "cflags" : "'+cflagstring+'"}', function(response) {
 				var all = JSON.parse(response);
 				// console.log('all response '+all);
 
@@ -272,6 +354,14 @@
 						}
 					}
 
+					if(d.content.recent) count_cflags[0]++;
+					if(d.content.upcoming) count_cflags[1]++;
+					if(d.content.stressful) count_cflags[2]++;
+					if(d.content.surreal) count_cflags[3]++;
+					if(d.content.scary) count_cflags[4]++;
+					if(d.content.romantic) count_cflags[5]++;
+					if(d.content.sexual) count_cflags[6]++;
+
 					h = '<div id="dream" class="drC" data-id="'+ d._id +'">';
 					h += '<div id="date">' + formatDate(d.date) + '</div>';
 					h += '<div id="title">' + d.title + '</div>';
@@ -279,8 +369,8 @@
 					h += '<div id="tags">' + 'T ('+d.tag_cnt+')' + '</div>';
 					h += '<div id="words">' + 'W ('+d.word_cnt+')' + '</div>';
 					h += '<div id="content" '+(d.content.recent?'class="content1" title="Recent event"':'')+'> </div>';
-					h += '<div id="content" '+(d.content.upcoming?'class="content1 title="Upcoming event""':'')+'> </div>';
-					h += '<div id="content" '+(d.content.stressful?'class="content1 title="Stressful""':'')+'> </div>';
+					h += '<div id="content" '+(d.content.upcoming?'class="content1" title="Upcoming event"':'')+'> </div>';
+					h += '<div id="content" '+(d.content.stressful?'class="content1" title="Stressful"':'')+'> </div>';
 					h += '<div id="content" '+(d.content.surreal?'class="content1" title="Surreal"':'')+'> </div>';
 					h += '<div id="content" '+(d.content.scary?'class="content1" title="Scary"':'')+'> </div>';
 					h += '<div id="content" '+(d.content.romantic?'class="content1" title="Romantic"':'')+'> </div>';
@@ -302,12 +392,38 @@
 
 				$('h1').append(" ("+all.allDreams.length+")");
 
+				$('#filter #content > div:nth-child(1)').append(" ("+count_cflags[0]+")");
+				$('#filter #content > div:nth-child(2)').append(" ("+count_cflags[1]+")");
+				$('#filter #content > div:nth-child(3)').append(" ("+count_cflags[2]+")");
+				$('#filter #content > div:nth-child(4)').append(" ("+count_cflags[3]+")");
+				$('#filter #content > div:nth-child(5)').append(" ("+count_cflags[4]+")");
+				$('#filter #content > div:nth-child(6)').append(" ("+count_cflags[5]+")");
+				$('#filter #content > div:nth-child(7)').append(" ("+count_cflags[6]+")");
+
+				$('#avg_sentiment #score #sentiment_number').html(all.sentimentTotal.score.toFixed(2));
+				$('#avg_sentiment #comparative #sentiment_number').html(all.sentimentTotal.comparative.toFixed(2));
+				$('#avg_sentiment #magnitude #sentiment_number').html((all.sentimentTotal.magnitude * 100).toFixed(1)+"%");
+
+				makeTopTags('tags', all.top_tags);
+				makeTopTags('characters', all.top_chars);
+
+				$("#tags ul li").live("click", function() {
+					var tagName = $(this).text().split(' ')[0];
+					window.location = "all?tag=" + tagName;
+				});
+
+				$("#characters ul li").live("click", function() {
+					var charName = $(this).text().split(' ')[0];
+					window.location = "all?character=" + charName;
+				});
+
+
 				$("#edit").live("click", function() {
 					var id = $(this).parent().parent().data('id');
 					console.log("click EDIT " + id);
 					window.location = "one.html?edit=1&id=" + id;
 				});
-
+// 
 				$("#delete").live("click", function() {
 					if(confirm("Are you sure you want to delete this dream?")) {
 		    			console.log("delete dream " + $(this).parent().parent().data('id'));
@@ -322,6 +438,41 @@
 					console.log("click TITLE " + id);
 					window.location = "one.html?id=" + id;
 				})
+
+				$('#filter-clear').click( function() {
+					$('#content_recent').prop('checked', false);
+					$('#content_upcoming').prop('checked', false);
+					$('#content_stressful').prop('checked', false);
+					$('#content_surreal').prop('checked', false);
+					$('#content_scary').prop('checked', false);
+					$('#content_romantic').prop('checked', false);
+					$('#content_sexual').prop('checked', false);
+				})
+
+				$('#filter-submit').click( function() {
+					console.log("Filter dreams");
+					var content = {
+						recent: $('#content_recent').prop('checked'),
+						upcoming: $('#content_upcoming').prop('checked'),
+						stressful: $('#content_stressful').prop('checked'),
+						surreal: $('#content_surreal').prop('checked'),
+						scary: $('#content_scary').prop('checked'),
+						romantic: $('#content_romantic').prop('checked'),
+						sexual: $('#content_sexual').prop('checked')
+					};
+					newURL = "all.html?";
+					if(tag) newURL += "tag="+tag;
+					else if (character) newURL += "character="+character;
+					else newURL += "none=0";
+					newURL += "&cf1="+(content.recent?1:0);
+					newURL += "&cf2="+(content.upcoming?1:0);
+					newURL += "&cf3="+(content.stressful?1:0);
+					newURL += "&cf4="+(content.surreal?1:0);
+					newURL += "&cf5="+(content.scary?1:0);
+					newURL += "&cf6="+(content.romantic?1:0);
+					newURL += "&cf7="+(content.sexual?1:0);
+					window.location = newURL;
+				});
 
 
 		        var chartData = [];
@@ -504,6 +655,15 @@
 		$('#' + id + '.tagcloud ul').html('');
 		for(var i=0; i<tags.length; i++) {
 			addTag(id, tags[i].name);
+		}
+	}
+
+	function makeTopTags(id, tags) {
+		console.log("makeTopTags: "+JSON.stringify(tags));
+
+		$('#' + id + '.tagcloud ul').html('');
+		for(var i=0; i<tags.length; i++) {
+			$('#' + id + '.tagcloud ul').append("<li>" + tags[i][0]+ " ("+tags[i][1] + ")</li>");
 		}
 	}
 

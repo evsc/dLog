@@ -24,7 +24,7 @@
 			data.addRows( chartData );
 
 	        var options = {
-	          width: 980, height: 200,
+	          width: 500, height: 200,
 	          legend: 'none',
 	          chartArea:{left:50,top:20,width:"100%",height:"65%"}
 	          // title: 'Tag: x',
@@ -45,6 +45,17 @@
 	
 		});
 
+		function toggleFilter() {
+		  var x = document.getElementById("filter-body");
+		  if (x.style.display === "none") {
+		    x.style.display = "contents";
+		    $('#filter-button').text( '▲');
+		  } else {
+		    x.style.display = "none";
+		    $('#filter-button').text( '▼');
+		  }
+		}
+
     </script>
 
 
@@ -64,13 +75,89 @@
 			<h1>Dream Archive</h1>
 			<div id="log"></div>
 
-			<div id="chart_div" style="width:800; height:300"></div>
+			<div id="chart_div"></div>
+
+			<div id="avg_sentiment">
+				<h4>Average Sentiment Scores</h4>
+				<div id="score">
+					<div id="sentiment_label">Score:</div>
+					<div id="sentiment_number"></div>
+				</div>
+				<div id="comparative">
+					<div id="sentiment_label">Comparative:</div>
+					<div id="sentiment_number"></div>
+				</div>
+				<div id="magnitude">
+					<div id="sentiment_label">Magnitude:</div>
+					<div id="sentiment_number"></div>
+				</div>
+			</div>
+
+			<div id="top_tags">
+				<h4>Top Tags</h4>
+				<div id="tags" class="tagcloud">
+					<ul>
+					</ul>
+				</div>
+			</div>
+
+			<div id="top_chars">
+				<h4>Top Characters</h4>
+				<div id="characters" class="tagcloud">
+					<ul>
+					</ul>
+				</div>
+			</div>
+
+			<div id="filter">
+				<div id="title"><h4>Filter:</h4></div>
+				<div id="filter-body" style="display: none;">
+					<div>
+						<h4>Content flags</h4>
+						<div id="content">
+							<div><input type="checkbox" name="content_recent" id="content_recent">Recent event</div>
+							<div><input type="checkbox" name="content_upcoming" id="content_upcoming">Upcoming event</div>
+							<div><input type="checkbox" name="content_stressful" id="content_stressful">Stressful</div>
+							<div><input type="checkbox" name="content_surreal" id="content_surreal">Surreal</div>
+							<div><input type="checkbox" name="content_scary" id="content_scary">Scary</div>
+							<div><input type="checkbox" name="content_romantic" id="content_romantic">Romantic</div>
+							<div><input type="checkbox" name="content_sexual" id="content_sexual">Sexual</div>
+						</div>
+					</div>
+					<div>
+						<h4>Sentiment analysis</h4>
+						<div id="sentiment-slide">
+							<div id="slide-label">Score
+							</div>
+							<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+						</div>
+						<div id="sentiment-slide">
+							<div id="slide-label">Comparative
+							</div>
+							<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+						</div>
+						<div id="sentiment-slide">
+							<div id="slide-label">Magnitude
+							</div>
+							<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+						</div>
+					</div>
+					<div>
+						<button id="filter-submit">Apply filter</button> 
+						<button id="filter-clear">Clear filter</button> 
+					</div>
+					
+				</div>
+				<div id="arrow">
+					<button id="filter-button" onclick="toggleFilter()">▼</button>
+				</div>
+			</div>
 
 			<div id="archive">
 				<div id="sort_bar">
-					<div id="date"><a href="&sort=date1"> ▲ </a> <a href="&sort=date0"> ▼ </a></div>
+					<div id="date"><a href="all?sort=date1"> ▲ </a> <a href="all?sort=date0"> ▼ </a></div>
 
-					<div id="title"><a href="?sort=title1"> ▲ </a> <a href="?sort=title0"> ▼ </a></div>
+					<div id="title"><a href="all?sort=title1"> ▲ </a> <a href="all?sort=title0"> ▼ </a></div>
 
 					<div id="characters" title="Characters"><a href="all?sort=chars1"> ▲ </a> <a href="all?sort=chars0"> ▼ </a></div>
 

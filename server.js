@@ -18,6 +18,8 @@ var db = require('./lib/db.js').initialize(
 	function() {
 		util.log("DB success");
 		// handle.updateAllDreams(db);	// run sentiment analysis on all old dreams
+		// handle.updateAllTags(db);
+		// handle.updateAllCharacters(db);
 	},
 	function() {
 		util.log("DB failure");
@@ -58,10 +60,14 @@ var server = http.createServer(function (request, response) {
 				util.log('dataJSON.pass '+dataJSON.pass + '   config.accesspw ' + config.accesspw);
 				if(dataJSON.pass == config.accesspw) {
 					switch(dataJSON.req) {
-						case 'all' : 	handle.all(db,dataJSON.tag,dataJSON.character,dataJSON.sort,response);
+						case 'all' : 	handle.all(db,dataJSON.tag,dataJSON.character,dataJSON.sort,dataJSON.cflags,response);
 										break;
 						case 'viz' : 	handle.viz(db,response);
 										break;
+						case 'viz_tags' : 	handle.viz_tags(db,response);
+										break;		
+						case 'viz_chars' : 	handle.viz_chars(db,response);
+										break;				
 						case 'chars' : 	handle.getChars(db,response);
 										break;
 						case 'tags' : 	handle.getTags(db,response);

@@ -96,6 +96,7 @@ label, .cat_title { display: block; font-family: sans-serif; font-size: 12px; }
 
 .taglist { display: block;  }
 h3 { font-size: 20px; font-weight: normal; }
+h4 { font-size: 14px; font-weight: bold; }
 .taglist ul, .tagcloud ul { list-style-type: none; margin-bottom: 20px; }
 .taglist ul li { display: table; margin-bottom: 7px; padding: 3px; }
 .tagcloud ul li { display: inline-block; margin-bottom: 7px; padding: 3px; margin-right:10px; }
@@ -109,7 +110,32 @@ h3 { font-size: 20px; font-weight: normal; }
 
 
 /* --- archive --- */
-#chart_div {padding-bottom: 30px;}
+#chart_div, #chart_div2, #chart_div3 {padding-bottom: 5px;  width: 1000px; height:650px }
+#chart_div, #chart_div2, #chart_div3, #avg_sentiment, #top_tags, #top_chars { 
+	float: left; margin-right: 15px; }
+#avg_sentiment { 
+	padding: 5px; width: 90px; background-color: #dfd; height: 180px; }
+#top_tags, #top_chars { 
+	width: 165px; border: solid 1px #ccc; height: 180px; 
+	overflow: hidden; padding: 5px; }
+#sentiment_label { margin-top: 8px;  }
+#sentiment_number { font-size: 20px; font-weight: bold; } 
+h4 {margin-bottom:10px;}
+
+#filter { background: #eee; padding: 5px; 
+	margin-bottom:30px; width: 990px; float: left;}
+#filter-body { display: none; }
+#filter #filter-body > div { float: left; padding-right: 40px; }
+#filter #title { float: left; width: 100px;}
+#filter #arrow { float: right; margin-right: 5px;}
+#filter #content { width: 300px; }
+#filter #content > div { float: left; padding-right:10px; }
+#filter #sentiment-slide { width: 240px; }
+#filter #content input { margin-bottom: 5px;}
+#filter #sentiment-slide input { margin-bottom: 0px; margin-top: -7px;}
+#filter #sentiment-slide #slide-label { width: 80px; float:left; }
+#filter h4 {margin-bottom:3px;}
+
 #archive {  }
 #archive #dream > div, #archive #sort_bar > div { float: left; margin: 3px;  }
 #archive #dream #buttons { margin: 0px; }
