@@ -8,7 +8,7 @@
 			currentTab = $('ul.navigationTabs a:first');
 		}
 		showTab.apply(currentTab.get(0));
-		$('#date').DatePicker({
+		$('#date1').DatePicker({
 			flat: true,
 			date: '2008-07-31',
 			current: '2008-07-31',
@@ -63,6 +63,38 @@
 				$('#inputDate').val(formated);
 				// if ($('#closeOnSelect input').attr('checked')) {
 					$('#inputDate').DatePickerHide();
+				// }
+			}
+		});
+		$('.startDate').DatePicker({
+			format:'m/d/Y',
+			date: $('#startDate').val(),
+			current: $('#startDate').val(),
+			starts: 1,
+			position: 'right',
+			onBeforeShow: function(){
+				$('#startDate').DatePickerSetDate($('#startDate').val(), true);
+			},
+			onChange: function(formated, dates){
+				$('#startDate').val(formated);
+				// if ($('#closeOnSelect input').attr('checked')) {
+					$('#startDate').DatePickerHide();
+				// }
+			}
+		});
+		$('.endDate').DatePicker({
+			format:'m/d/Y',
+			date: $('#endDate').val(),
+			current: $('#endDate').val(),
+			starts: 1,
+			position: 'right',
+			onBeforeShow: function(){
+				$('#endDate').DatePickerSetDate($('#endDate').val(), true);
+			},
+			onChange: function(formated, dates){
+				$('#endDate').val(formated);
+				// if ($('#closeOnSelect input').attr('checked')) {
+					$('#endDate').DatePickerHide();
 				// }
 			}
 		});

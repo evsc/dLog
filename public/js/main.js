@@ -146,7 +146,9 @@
 				});
 				$("#tags h3").append(" ("+tags.allTags.length+")");
 				tags.allTags.forEach( function(t) {
-					$('#tags.tagcloud ul').append("<li data-name=" + t.name+">" + t.name + " (" + t.cnt+")</li>");
+					var hide = (t.name).replace(/./g, '*');
+					hide = t.name;
+					$('#tags.tagcloud ul').append("<li data-name=" + t.name+">" + hide + " (" + t.cnt+")</li>");
 				});
 			});
 
@@ -173,7 +175,9 @@
 				});
 				$("#characters h3").append(" ("+chars.allChars.length+")");
 				chars.allChars.forEach( function(c) {
-					$('#characters.tagcloud ul').append("<li data-name=" + c.name+">@" + c.name + " (" + c.cnt+")</li>");
+					var hide = (c.name).replace(/./g, '*');
+					hide = c.name;
+					$('#characters.tagcloud ul').append("<li data-name=" + c.name+">@" + hide + " (" + c.cnt+")</li>");
 				});
 			});
 
@@ -259,7 +263,10 @@
 				var i = 0;
 
 				all.allChars.forEach( function(c) {
-					chartData[i] = [ c.sentiment.magnitude, c.sentiment.comparative, "point { size: 0; }", c.name];
+					// var hide = (c.name).replace(/./g, '*');
+					var hide = (c.name).replace(/(?<!^)./g, '*');
+					hide = c.name;
+					chartData[i] = [ c.sentiment.magnitude, c.sentiment.comparative, "point { size: 0; }", hide];
 					i++;
 				});
 
@@ -288,6 +295,12 @@
 			var tag = $.urlParam('tag') || false;
 			var character = $.urlParam('character') || false;
 			var sort = $.urlParam('sort') || false;
+			var startDateExists = $.urlParam('startDate') || false;
+			var endDateExists = $.urlParam('endDate') || false;
+			
+			var startDate = startDateExists ? new Date(decodeURIComponent(startDateExists)) : new Date(2003,1,1);
+			var endDate = endDateExists ? new Date(decodeURIComponent(endDateExists)) : new Date(Date.now());
+
 			if(tag) $('h1').append(" / tag: "+tag);
 			if(character) $('h1').append(" / character: "+character);
 
@@ -320,9 +333,9 @@
 			cflagstring += cflags.romantic ? 1 : 0;
 			cflagstring += cflags.sexual ? 1 : 0;
 
-			var firstMonth = new Date(2003,1,1);
+			var firstMonth = new Date(startDate);
 			firstMonth.setDate(1);
-			var lastMonth = new Date(Date.now());
+			var lastMonth = new Date(endDate);
 			lastMonth.setDate(1);
 			var dream_by_month = new Array(); 
 			var m = 0;
@@ -335,8 +348,13 @@
 			var count_cflags = new Array();
 			for( var f = 0; f<7; f++) count_cflags[f]=0;
 
+			$('#startDate').val(formatDate(startDate));
+			$('#endDate').val(formatDate(endDate));
+			// console.log("startDate: "+startDate+ " ... "+formatDate(startDate));
+			// console.log("endDate: "+endDate+ " ... "+formatDate(endDate));
+
 			// load all dreams into page
-			$.post(url, '{ "req" : "all", "tag" : "'+tag+'", "character" : "'+character+'", "sort" : "'+sort+'", "pass" : "'+pass+'", "cflags" : "'+cflagstring+'"}', function(response) {
+			$.post(url, '{ "req" : "all", "tag" : "'+tag+'", "character" : "'+character+'", "sort" : "'+sort+'", "pass" : "'+pass+'", "cflags" : "'+cflagstring+'", "startDate" : "'+startDateExists+'", "endDate" : "'+endDateExists+'"}', function(response) {
 				var all = JSON.parse(response);
 				// console.log('all response '+all);
 
@@ -447,6 +465,8 @@
 					$('#content_scary').prop('checked', false);
 					$('#content_romantic').prop('checked', false);
 					$('#content_sexual').prop('checked', false);
+					$('#startDate').val(formatDate(new Date(2003,1,1)));
+					$('#endDate').val(formatDate(new Date()));
 				})
 
 				$('#filter-submit').click( function() {
@@ -464,6 +484,13 @@
 					if(tag) newURL += "tag="+tag;
 					else if (character) newURL += "character="+character;
 					else newURL += "none=0";
+
+					var _startD = new Date($('#startDate').val()).toISOString();
+					var _endD = new Date($('#endDate').val()).toISOString();
+					// console.log("start date: "+_startD);
+					// console.log("end date: "+_endD);
+					newURL += "&startDate="+encodeURIComponent(_startD);
+					newURL += "&endDate="+encodeURIComponent(_endD);
 					newURL += "&cf1="+(content.recent?1:0);
 					newURL += "&cf2="+(content.upcoming?1:0);
 					newURL += "&cf3="+(content.stressful?1:0);

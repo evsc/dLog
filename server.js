@@ -18,6 +18,8 @@ var db = require('./lib/db.js').initialize(
 	function() {
 		util.log("DB success");
 		// handle.updateAllDreams(db);	// run sentiment analysis on all old dreams
+
+		// run these manually occasionally to update the sentiment graphs on the viz page:
 		// handle.updateAllTags(db);
 		// handle.updateAllCharacters(db);
 	},
@@ -58,9 +60,10 @@ var server = http.createServer(function (request, response) {
 
 			if(dataJSON) {
 				util.log('dataJSON.pass '+dataJSON.pass + '   config.accesspw ' + config.accesspw);
+				util.log('dataJSON.startDate '+dataJSON.startDate);
 				if(dataJSON.pass == config.accesspw) {
 					switch(dataJSON.req) {
-						case 'all' : 	handle.all(db,dataJSON.tag,dataJSON.character,dataJSON.sort,dataJSON.cflags,response);
+						case 'all' : 	handle.all(db,dataJSON.tag,dataJSON.character,dataJSON.sort,dataJSON.cflags,dataJSON.startDate,dataJSON.endDate,response);
 										break;
 						case 'viz' : 	handle.viz(db,response);
 										break;

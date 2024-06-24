@@ -34,14 +34,14 @@
 			// data.addRow([new Date(2011, 0, 1), 10])
 			data.addRows( chartData );
 
-	        var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+	        var chart = new google.visualization.ScatterChart(document.getElementById('viz_div1'));
 	        chart.draw(data, options);
 	    }
 
 	    function drawTagChart(chartData) {
 	    	console.log("draw tag chart");
 	    	var options = {
-	          title: 'Tags Sentiment Magnitude/Comparative Scatterplot (Tags with more than 7 dreams)',
+	          title: 'Tags Sentiment Magnitude/Comparative Scatterplot (Tags with more than 10 dreams)',
 	          hAxis: {title: 'Magnitude'},
 	          vAxis: {title: 'Comparative Score'},
 	          width: 1000, height: 650, legend: 'none',
@@ -56,14 +56,14 @@
 			// data.addRow([new Date(2011, 0, 1), 10])
 			data.addRows( chartData );
 
-	        var chart = new google.visualization.ScatterChart(document.getElementById('chart_div2'));
+	        var chart = new google.visualization.ScatterChart(document.getElementById('viz_div2'));
 	        chart.draw(data, options);
 	    }
 
 	    function drawCharacterChart(chartData) {
 	    	console.log("draw character chart");
 	    	var options = {
-	          title: 'Character Sentiment Magnitude/Comparative Scatterplot (Characters with more than 5 dreams)',
+	          title: 'Character Sentiment Magnitude/Comparative Scatterplot (Characters with more than 7 dreams)',
 	          hAxis: {title: 'Magnitude'},
 	          vAxis: {title: 'Comparative Score'},
 	          width: 1000, height: 650, legend: 'none',
@@ -78,7 +78,7 @@
 			// data.addRow([new Date(2011, 0, 1), 10])
 			data.addRows( chartData );
 
-	        var chart = new google.visualization.ScatterChart(document.getElementById('chart_div3'));
+	        var chart = new google.visualization.ScatterChart(document.getElementById('viz_div3'));
 	        chart.draw(data, options);
 	    }
 
@@ -102,7 +102,8 @@
 			<div id="menu">
 				<a href="/one">new</a> / 
 				<a href="/all">all</a> / 
-				<a href="/tags">tags</a>
+				<a href="/tags">tags</a> /
+				<a href="/viz">viz</a>
 			</div>
 		</div>
 
@@ -110,15 +111,15 @@
 
 			<h1>Dream Viz</h1>
 
-			<div id="chart_div"></div>
+			<div id="viz_div1" class="viz_div"></div>
 
 			<br/>
 
-			<div id="chart_div2"></div>
+			<div id="viz_div2" class="viz_div"></div>
 
 			<br/>
 
-			<div id="chart_div3"></div>
+			<div id="viz_div3" class="viz_div"></div>
 
 		</div>  <!-- end main -->
 	</div>  <!-- end container -->

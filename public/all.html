@@ -5,6 +5,12 @@
 	<title>Dream Archive</title>
 	<link rel="stylesheet" type="text/css" media="all" href="style.css" />
 	<link rel="stylesheet" media="screen" type="text/css" href="lib/datepicker/css/datepicker.css" />
+	<script type="text/javascript" src="lib/datepicker/js/jquery.js"></script>
+	<script type="text/javascript" src="lib/datepicker/js/datepicker.js"></script>
+	<script type="text/javascript" src="lib/datepicker/js/eye.js"></script>
+    <script type="text/javascript" src="lib/datepicker/js/utils.js"></script>
+    <script type="text/javascript" src="lib/datepicker/js/layout.js?ver=1.0.2"></script>
+    <script type="text/javascript" src="js/date.format.js"></script>
 	<script src="http://code.jquery.com/jquery-1.7.min.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -67,14 +73,14 @@
 			<div id="menu">
 				<a href="/one">new</a> / 
 				<a href="/all">all</a> / 
-				<a href="/tags">tags</a>
+				<a href="/tags">tags</a> /
+				<a href="/viz">viz</a>
 			</div>
 		</div>
 
 		<div id="main">
 			<h1>Dream Archive</h1>
 			<div id="log"></div>
-
 			<div id="chart_div"></div>
 
 			<div id="avg_sentiment">
@@ -109,6 +115,7 @@
 				</div>
 			</div>
 
+
 			<div id="filter">
 				<div id="title"><h4>Filter:</h4></div>
 				<div id="filter-body" style="display: none;">
@@ -125,6 +132,15 @@
 						</div>
 					</div>
 					<div>
+						<h4>Time filter</h4>
+						<div class="cat_selection">
+							<input class="startDate" id="startDate" value="" />
+						</div>
+						<div class="cat_selection">
+							<input class="endDate" id="endDate" value="" />
+						</div>
+					</div>
+<!-- 					<div>
 						<h4>Sentiment analysis</h4>
 						<div id="sentiment-slide">
 							<div id="slide-label">Score
@@ -141,7 +157,7 @@
 							</div>
 							<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
 						</div>
-					</div>
+					</div> -->
 					<div>
 						<button id="filter-submit">Apply filter</button> 
 						<button id="filter-clear">Clear filter</button> 

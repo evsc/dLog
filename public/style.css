@@ -108,10 +108,12 @@ h4 { font-size: 14px; font-weight: bold; }
 #characters.taglist ul li:hover, #characters.tagcloud ul li:hover { background-color: #4dd5ff;  }
 #tags.taglist ul li:hover, #tags.tagcloud ul li:hover { background-color: #d5d5d5;  }
 
+/* ---- viz ---- */
+.viz_div {  width: 1000px; height:650px }
 
 /* --- archive --- */
-#chart_div, #chart_div2, #chart_div3 {padding-bottom: 5px;  width: 1000px; height:650px }
-#chart_div, #chart_div2, #chart_div3, #avg_sentiment, #top_tags, #top_chars { 
+#chart_div {padding-bottom: 5px; width: 500px; }
+#chart_div, #avg_sentiment, #top_tags, #top_chars { 
 	float: left; margin-right: 15px; }
 #avg_sentiment { 
 	padding: 5px; width: 90px; background-color: #dfd; height: 180px; }
